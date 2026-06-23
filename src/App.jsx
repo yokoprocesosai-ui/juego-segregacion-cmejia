@@ -15,40 +15,33 @@ const BINS = [
 const BIN_BY_ID = Object.fromEntries(BINS.map((b) => [b.id, b]));
 
 const ITEMS = [
-  // 🔵 AZUL
-  { id: "carton",     name: "Cartones",                        emoji: "📦", bin: "papel",      reason: "Los cartones son reciclables: van al tacho azul." },
-  { id: "papel",      name: "Papeles",                         emoji: "📄", bin: "papel",      reason: "Todo papel limpio va al tacho azul." },
-  { id: "planos",     name: "Impresión de planos",             emoji: "📐", bin: "papel",      reason: "Los planos impresos son papel: van al tacho azul." },
-  { id: "folder",     name: "Folders",                         emoji: "🗂️", bin: "papel",      reason: "Los folders de papel van al tacho azul." },
-  // 🟡 AMARILLO
-  { id: "clavos",     name: "Clavos",                          emoji: "📌", bin: "metalicos",  reason: "Los clavos son metálicos: van al tacho amarillo." },
-  { id: "fierros",    name: "Retazos de fierros",              emoji: "🔧", bin: "metalicos",  reason: "Los retazos de fierro van al tacho amarillo." },
-  { id: "pernos",     name: "Pernos",                          emoji: "🔩", bin: "metalicos",  reason: "Los pernos son metálicos: van al tacho amarillo." },
-  { id: "envmetal",   name: "Envases metálicos limpios",       emoji: "🥫", bin: "metalicos",  reason: "Envases metálicos limpios van al tacho amarillo." },
-  // ⚪ BLANCO
-  { id: "botgaseosa", name: "Botella de gaseosa limpia",       emoji: "🥤", bin: "plasticos",  reason: "Botellas de plástico limpias van al tacho blanco." },
-  { id: "botagua",    name: "Botella de agua limpia",          emoji: "💧", bin: "plasticos",  reason: "Botellas de agua limpias van al tacho blanco." },
-  // 🩶 PLOMO
-  { id: "vidrio",     name: "Vidrio",                          emoji: "🪟", bin: "vidrios",    reason: "Todo vidrio, limpio o roto, va al tacho plomo." },
-  // 🔴 ROJO
-  { id: "guantes",    name: "Guantes con aceite",              emoji: "🧤", bin: "peligrosos", reason: "Guantes impregnados de aceite son peligrosos: tacho rojo." },
-  { id: "tyvek",      name: "Tyvek contaminado",               emoji: "🦺", bin: "peligrosos", reason: "El tyvek contaminado es residuo peligroso: tacho rojo." },
-  { id: "cinta",      name: "Cinta con restos de cemento",     emoji: "🎗️", bin: "peligrosos", reason: "Cinta de seguridad con cemento es peligrosa: tacho rojo." },
-  { id: "baldepint",  name: "Baldes de pintura",               emoji: "🪣", bin: "peligrosos", reason: "Los baldes de pintura son residuo peligroso: tacho rojo." },
-  { id: "madera",     name: "Madera con restos de concreto",   emoji: "🪵", bin: "peligrosos", reason: "Madera contaminada con concreto va al tacho rojo." },
-  { id: "pilas",      name: "Pilas / baterías",                emoji: "🔋", bin: "peligrosos", reason: "Las pilas y baterías son peligrosas: tacho rojo." },
-  { id: "bidon",      name: "Bidones de combustible",          emoji: "🛢️", bin: "peligrosos", reason: "Bidones de combustible son peligrosos: tacho rojo." },
-  { id: "quimicos",   name: "Aditivos químicos",               emoji: "🧪", bin: "peligrosos", reason: "Los aditivos químicos son peligrosos: tacho rojo." },
-  // ⚫ NEGRO
-  { id: "senaliz",    name: "Señalización en mal estado",      emoji: "🚧", bin: "noaprov",    reason: "La señalización deteriorada no es aprovechable: tacho negro." },
-  { id: "botresid",   name: "Botellas con residuos",           emoji: "🍶", bin: "noaprov",    reason: "Botellas contaminadas no son reciclables: van al tacho negro." },
-  { id: "tecnopor",   name: "Tecnopor",                        emoji: "🧊", bin: "noaprov",    reason: "El tecnopor no es aprovechable: tacho negro." },
-  { id: "eppsdet",    name: "EPPs deteriorados",               emoji: "🥾", bin: "noaprov",    reason: "⚠️ EPPs deteriorados van al tacho negro. Recuerda: entrega los EPPs rotos o en mal estado al almacén para su reposición." },
-  { id: "lentesrot",  name: "Lentes de seguridad rotos",       emoji: "🥽", bin: "noaprov",    reason: "⚠️ Los lentes rotos van al tacho negro. Recuerda: entrega los lentes dañados al almacén para su reposición." },
-  { id: "cascodet",   name: "Casco deteriorado",               emoji: "⛑️", bin: "noaprov",    reason: "⚠️ El casco deteriorado va al tacho negro. Recuerda: entrega los cascos dañados al almacén para su reposición." },
-  { id: "arnesdet",   name: "Arnés deteriorado",               emoji: "🦺", bin: "noaprov",    reason: "⚠️ El arnés deteriorado va al tacho negro. Recuerda: entrega los arneses dañados al almacén para su reposición." },
-  // 🟤 MARRÓN
-  { id: "frutas",     name: "Restos de frutas",                emoji: "🍌", bin: "organicos",  reason: "Los restos de frutas son orgánicos: van al tacho marrón." },
+  { id: "carton",     name: "Cartones",                        emoji: "📦", bin: "papel",      reason: "Los cartones son reciclables: van al tacho AZUL." },
+  { id: "papel",      name: "Papeles",                         emoji: "📄", bin: "papel",      reason: "Todo papel limpio va al tacho AZUL." },
+  { id: "planos",     name: "Impresión de planos",             emoji: "📐", bin: "papel",      reason: "Los planos impresos son papel: van al tacho AZUL." },
+  { id: "folder",     name: "Folders",                         emoji: "🗂️", bin: "papel",      reason: "Los folders de papel van al tacho AZUL." },
+  { id: "clavos",     name: "Clavos",                          emoji: "📌", bin: "metalicos",  reason: "Los clavos son metálicos: van al tacho AMARILLO." },
+  { id: "fierros",    name: "Retazos de fierros",              emoji: "🔧", bin: "metalicos",  reason: "Los retazos de fierro van al tacho AMARILLO." },
+  { id: "pernos",     name: "Pernos",                          emoji: "🔩", bin: "metalicos",  reason: "Los pernos son metálicos: van al tacho AMARILLO." },
+  { id: "envmetal",   name: "Envases metálicos limpios",       emoji: "🥫", bin: "metalicos",  reason: "Envases metálicos limpios van al tacho AMARILLO." },
+  { id: "botgaseosa", name: "Botella de gaseosa limpia",       emoji: "🥤", bin: "plasticos",  reason: "Botellas de plástico limpias van al tacho BLANCO." },
+  { id: "botagua",    name: "Botella de agua limpia",          emoji: "💧", bin: "plasticos",  reason: "Botellas de agua limpias van al tacho BLANCO." },
+  { id: "vidrio",     name: "Vidrio",                          emoji: "🪟", bin: "vidrios",    reason: "Todo vidrio, limpio o roto, va al tacho PLOMO." },
+  { id: "guantes",    name: "Guantes con aceite",              emoji: "🧤", bin: "peligrosos", reason: "Guantes con aceite son PELIGROSOS: tacho ROJO." },
+  { id: "tyvek",      name: "Tyvek contaminado",               emoji: "🦺", bin: "peligrosos", reason: "El tyvek contaminado es PELIGROSO: tacho ROJO." },
+  { id: "cinta",      name: "Cinta con restos de cemento",     emoji: "🎗️", bin: "peligrosos", reason: "Cinta con cemento es PELIGROSA: tacho ROJO." },
+  { id: "baldepint",  name: "Baldes de pintura",               emoji: "🪣", bin: "peligrosos", reason: "Los baldes de pintura son PELIGROSOS: tacho ROJO." },
+  { id: "madera",     name: "Madera con restos de concreto",   emoji: "🪵", bin: "peligrosos", reason: "Madera con concreto es PELIGROSA: tacho ROJO." },
+  { id: "pilas",      name: "Pilas / baterías",                emoji: "🔋", bin: "peligrosos", reason: "Las pilas y baterías son PELIGROSAS: tacho ROJO." },
+  { id: "bidon",      name: "Bidones de combustible",          emoji: "🛢️", bin: "peligrosos", reason: "Bidones de combustible son PELIGROSOS: tacho ROJO." },
+  { id: "quimicos",   name: "Aditivos químicos",               emoji: "🧪", bin: "peligrosos", reason: "Los aditivos químicos son PELIGROSOS: tacho ROJO." },
+  { id: "senaliz",    name: "Señalización en mal estado",      emoji: "🚧", bin: "noaprov",    reason: "La señalización deteriorada va al tacho NEGRO." },
+  { id: "botresid",   name: "Botellas con residuos",           emoji: "🍶", bin: "noaprov",    reason: "Botellas contaminadas van al tacho NEGRO." },
+  { id: "tecnopor",   name: "Tecnopor",                        emoji: "🧊", bin: "noaprov",    reason: "El tecnopor va al tacho NEGRO." },
+  { id: "eppsdet",    name: "EPPs deteriorados",               emoji: "🥾", bin: "noaprov",    reason: "EPPs deteriorados van al tacho NEGRO.\n⚠️ Recuerda: entrega los EPPs rotos o en mal estado al almacén para su reposición y disposición." },
+  { id: "lentesrot",  name: "Lentes de seguridad rotos",       emoji: "🥽", bin: "noaprov",    reason: "Lentes rotos van al tacho NEGRO.\n⚠️ Recuerda: entrega los lentes dañados al almacén para su reposición y disposición." },
+  { id: "cascodet",   name: "Casco deteriorado",               emoji: "⛑️", bin: "noaprov",    reason: "El casco deteriorado va al tacho NEGRO.\n⚠️ Recuerda: entrega los cascos dañados al almacén para su reposición y disposición." },
+  { id: "arnesdet",   name: "Arnés deteriorado",               emoji: "🦺", bin: "noaprov",    reason: "El arnés deteriorado va al tacho NEGRO.\n⚠️ Recuerda: entrega los arneses dañados al almacén para su reposición y disposición." },
+  { id: "frutas",     name: "Restos de frutas",                emoji: "🍌", bin: "organicos",  reason: "Los restos de frutas son orgánicos: van al tacho MARRÓN." },
 ];
 
 const ROUND_COUNT = 12;
@@ -70,18 +63,19 @@ function fmtDate(iso) {
   return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
-function Mascot({ type = "male", size = 130 }) {
+// Muñequitos — imágenes reales CMEJIA
+function Mascot({ type = "male", size = 180 }) {
   const src = type === "female" ? "/mascot-female.jpg" : "/mascot-male.jpg";
   return (
-    <img src={src} alt="CMEJIA"
-      style={{ height: size, width: "auto", objectFit: "contain", display: "block" }} />
+    <img src={src} alt="Trabajador CMEJIA"
+      style={{ height: size, width: "auto", objectFit: "contain", display: "block", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))" }} />
   );
 }
 
 function Logo({ scale = 1 }) {
   return (
     <div className="flex items-center gap-2">
-      <svg width={38 * scale} height={38 * scale} viewBox="0 0 64 64">
+      <svg width={44 * scale} height={44 * scale} viewBox="0 0 64 64">
         <path d="M4 58 L4 30 L22 22 L22 58 Z" fill={BLUE} />
         <rect x="24" y="14" width="16" height="44" fill={BLUE} />
         <path d="M42 58 L42 28 L58 28 L58 58 Z" fill="#7FC9ED" />
@@ -93,38 +87,42 @@ function Logo({ scale = 1 }) {
       </svg>
       <div className="leading-none">
         <div className="font-extrabold tracking-tight" style={{ color: BLUE }}>
-          <span style={{ fontSize: 22 * scale }}>C</span>
-          <span style={{ fontSize: 18 * scale }}>MEJIA</span>
-          <span className="align-top ml-1" style={{ fontSize: 11 * scale }}>S.A.C.</span>
+          <span style={{ fontSize: 26 * scale }}>C</span>
+          <span style={{ fontSize: 22 * scale }}>MEJIA</span>
+          <span className="align-top ml-1" style={{ fontSize: 13 * scale }}>S.A.C.</span>
         </div>
-        <div className="font-semibold tracking-wide" style={{ color: BLUE, fontSize: 9 * scale }}>CONTRATISTAS GENERALES</div>
+        <div className="font-bold tracking-wide" style={{ color: BLUE, fontSize: 11 * scale }}>CONTRATISTAS GENERALES</div>
       </div>
     </div>
   );
 }
 
+// Tacho cilindro — grande y fácil de tocar
 function Bin({ bin, onPick, answered, item }) {
-  let ring = "none";
+  let glow = {};
   if (answered) {
-    if (bin.id === item.bin) ring = "0 0 0 4px #16a34a";
-    else if (bin.id === answered.chosen && !answered.correct) ring = "0 0 0 4px #dc2626";
+    if (bin.id === item.bin) glow = { boxShadow: "0 0 0 5px #16a34a", transform: "scale(1.06)" };
+    else if (bin.id === answered.chosen && !answered.correct) glow = { boxShadow: "0 0 0 5px #dc2626" };
   }
   const light = bin.text === "#fff";
   return (
     <button onClick={() => onPick(bin.id)} disabled={!!answered}
-      className="flex flex-col items-center transition transform hover:-translate-y-1 active:scale-95"
-      style={{ cursor: answered ? "default" : "pointer" }}>
-      <div style={{ width: "80%", height: 10, borderRadius: "50%", background: bin.lid, marginBottom: -5, position: "relative", zIndex: 1 }} />
-      <div className="w-full flex flex-col items-center px-1 pt-3 pb-2"
+      style={{ cursor: answered ? "default" : "pointer", transition: "transform 0.15s, box-shadow 0.15s", padding: 0, background: "none", border: "none" }}
+      className="flex flex-col items-center w-full active:scale-95">
+      {/* Tapa */}
+      <div style={{ width: "84%", height: 13, borderRadius: "50%", background: bin.lid, marginBottom: -6, position: "relative", zIndex: 1, boxShadow: "0 2px 4px rgba(0,0,0,0.25)" }} />
+      {/* Cuerpo */}
+      <div className="w-full flex flex-col items-center rounded-b-2xl"
         style={{
-          background: bin.color, borderRadius: "10px 10px 16px 16px", color: bin.text,
-          border: bin.border ? `1px solid ${bin.border}` : "none",
-          boxShadow: ring !== "none" ? ring : "0 3px 7px rgba(0,0,0,0.18)",
+          background: bin.color, color: bin.text,
+          border: bin.border ? `2px solid ${bin.border}` : "none",
+          padding: "14px 6px 12px",
+          boxShadow: answered && bin.id === item.bin ? "0 0 0 5px #16a34a" : answered && bin.id === answered.chosen && !answered.correct ? "0 0 0 5px #dc2626" : "0 4px 10px rgba(0,0,0,0.22)",
+          ...glow,
         }}>
-        <span style={{ fontSize: 24, lineHeight: 1 }}>♻️</span>
-        <span className="font-bold text-center leading-none mt-1" style={{ fontSize: 10 }}>RESIDUOS</span>
-        <span className="font-extrabold text-center leading-tight" style={{ fontSize: 11, textTransform: "uppercase" }}>{bin.name}</span>
-        <span className="mt-1 rounded-full px-2 font-semibold" style={{ fontSize: 10, background: light ? "rgba(255,255,255,0.20)" : "rgba(0,0,0,0.10)" }}>{bin.short}</span>
+        <span style={{ fontSize: 28, lineHeight: 1 }}>♻️</span>
+        <span className="font-black text-center leading-tight mt-1" style={{ fontSize: 13, letterSpacing: 0.2, textTransform: "uppercase", lineHeight: 1.2 }}>{bin.name}</span>
+        <span className="mt-1 rounded-full px-2 py-0.5 font-bold" style={{ fontSize: 11, background: light ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.12)" }}>{bin.short}</span>
       </div>
     </button>
   );
@@ -132,8 +130,8 @@ function Bin({ bin, onPick, answered, item }) {
 
 function Chip({ bin }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold"
-      style={{ background: bin.color, color: bin.text, border: bin.border ? `1px solid ${bin.border}` : "none" }}>
+    <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-bold"
+      style={{ background: bin.color, color: bin.text, border: bin.border ? `2px solid ${bin.border}` : "none", fontSize: 13 }}>
       ♻️ {bin.name}
     </span>
   );
@@ -202,10 +200,7 @@ export default function App() {
     stopTick();
     const t = (Date.now() - startRef.current) / 1000;
     setFinalTime(t);
-    saveResult({
-      name: nameRef.current, score: scoreRef.current, correct: correctRef.current,
-      total: orderRef.current.length, timeSec: Math.round(t), date: new Date().toISOString(),
-    });
+    saveResult({ name: nameRef.current, score: scoreRef.current, correct: correctRef.current, total: orderRef.current.length, timeSec: Math.round(t), date: new Date().toISOString() });
     setScreen("end");
   }
 
@@ -226,7 +221,7 @@ export default function App() {
       scoreRef.current += gain; setScore(scoreRef.current);
       correctRef.current += 1; setCorrectCount(correctRef.current);
       setStreak((s) => { const n = s + 1; setBestStreak((b) => Math.max(b, n)); return n; });
-      setTimeout(() => advance(), 850);
+      setTimeout(() => advance(), 1000);
     } else {
       setStreak(0);
       setMistakes((m) => [...m, item]);
@@ -235,136 +230,168 @@ export default function App() {
 
   function openRanking() {
     setScreen("ranking"); setConfirmClear(false); setBoardLoading(true);
-    try {
-      const data = JSON.parse(localStorage.getItem(STORE_KEY) || "[]");
-      setBoard(data);
-    } catch (e) { setBoard([]); }
+    try { setBoard(JSON.parse(localStorage.getItem(STORE_KEY) || "[]")); }
+    catch (e) { setBoard([]); }
     setBoardLoading(false);
   }
 
-  function clearBoard() {
-    localStorage.removeItem(STORE_KEY);
-    setBoard([]);
-    setConfirmClear(false);
-  }
+  function clearBoard() { localStorage.removeItem(STORE_KEY); setBoard([]); setConfirmClear(false); }
 
   const sortedBoard = [...board].sort((a, b) => b.score - a.score || a.timeSec - b.timeSec);
 
   function buildCSV() {
-    const header = ["Puesto", "Nombre", "Puntos", "Aciertos", "Total", "Precision", "Tiempo", "Fecha"];
-    const lines = [header.join(",")];
-    sortedBoard.forEach((r, i) => {
-      const acc = Math.round((r.correct / r.total) * 100) + "%";
-      lines.push([i + 1, `"${r.name}"`, r.score, r.correct, r.total, acc, formatTime(r.timeSec), `"${new Date(r.date).toLocaleString("es-PE")}"`].join(","));
-    });
+    const lines = [["Puesto","Nombre","Puntos","Aciertos","Total","Precision","Tiempo","Fecha"].join(",")];
+    sortedBoard.forEach((r, i) => lines.push([i+1,`"${r.name}"`,r.score,r.correct,r.total,Math.round((r.correct/r.total)*100)+"%",formatTime(r.timeSec),`"${new Date(r.date).toLocaleString("es-PE")}"`].join(",")));
     return lines.join("\n");
   }
-
   async function copyCSV() {
-    try { await navigator.clipboard.writeText(buildCSV()); setCopied(true); setTimeout(() => setCopied(false), 2000); }
-    catch (e) { console.error(e); }
+    try { await navigator.clipboard.writeText(buildCSV()); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch (e) {}
   }
-
   function downloadCSV() {
-    const blob = new Blob([buildCSV()], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a"); a.href = url; a.download = "ranking_segregacion_cmejia.csv";
-    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([buildCSV()], { type: "text/csv;charset=utf-8;" }));
+    a.download = "ranking_segregacion_cmejia.csv";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
   }
 
-  const wrap = { minHeight: "100vh", background: "linear-gradient(160deg,#eef4fa 0%,#e3edf6 55%,#dbe7f3 100%)" };
+  const wrap = {
+    minHeight: "100vh",
+    background: "linear-gradient(160deg,#dbeeff 0%,#e8f4fb 50%,#d6eaf8 100%)",
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  };
 
+  // ── INICIO ───────────────────────────────────────────────────────
   if (screen === "start") return (
     <div style={wrap}>
-      <div className="max-w-3xl mx-auto px-4 py-7">
-        <div className="bg-white rounded-2xl shadow-lg p-6">
-          <div className="flex justify-between items-center flex-wrap gap-3">
-            <Logo />
-            <span className="text-xs font-semibold rounded-full px-3 py-1" style={{ background: "#eaf6fd", color: NAVY }}>Área de Medio Ambiente</span>
+      <div style={{ maxWidth: 680, margin: "0 auto", padding: "24px 16px" }}>
+        <div style={{ background: "#fff", borderRadius: 24, boxShadow: "0 8px 32px rgba(0,0,0,0.10)", overflow: "hidden" }}>
+          {/* Header */}
+          <div style={{ background: NAVY, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Logo scale={1} />
+            <span style={{ background: BLUE, color: "#fff", borderRadius: 20, padding: "6px 14px", fontSize: 13, fontWeight: 700 }}>Medio Ambiente</span>
           </div>
-          <div className="text-center mt-4">
-            <div className="text-5xl">♻️</div>
-            <h1 className="text-3xl font-extrabold mt-1" style={{ color: NAVY }}>¿A dónde va el residuo?</h1>
-            <p className="text-sm font-semibold mt-1" style={{ color: BLUE }}>Segregación de residuos sólidos · NTP 900.058:2019</p>
-          </div>
-          <div className="flex items-end justify-center gap-3 mt-4">
-            <Mascot type="female" size={120} />
-            <div className="bg-blue-50 rounded-2xl p-3 shadow-sm mb-4" style={{ border: `2px solid ${BLUE}` }}>
-              <p className="text-sm text-gray-700">¡Hola! Toca el <b>tacho del color correcto</b> para cada residuo. ¡Hazlo rápido y sin fallar! ♻️</p>
+
+          {/* Hero con muñequita grande */}
+          <div style={{ background: "linear-gradient(135deg,#eaf6fd,#f0f8ff)", padding: "24px 20px 16px", display: "flex", alignItems: "flex-end", gap: 16 }}>
+            <div style={{ flexShrink: 0 }}>
+              <Mascot type="female" size={200} />
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 36, lineHeight: 1 }}>♻️</div>
+              <h1 style={{ color: NAVY, fontSize: 28, fontWeight: 900, lineHeight: 1.1, margin: "8px 0 6px" }}>
+                ¿A dónde va el residuo?
+              </h1>
+              <p style={{ color: BLUE, fontSize: 14, fontWeight: 700, margin: 0 }}>
+                NTP 900.058:2019
+              </p>
+              <div style={{ background: "#fff", border: `2px solid ${BLUE}`, borderRadius: 14, padding: "12px 14px", marginTop: 12 }}>
+                <p style={{ margin: 0, fontSize: 15, color: "#1a1a1a", lineHeight: 1.4 }}>
+                  ¡Hola! Toca el <b style={{ color: BLUE }}>tacho del color correcto</b> para cada residuo. ¡Rápido y sin fallar! 💪
+                </p>
+              </div>
             </div>
           </div>
-          <div className="mt-3">
-            <label className="text-sm font-bold" style={{ color: NAVY }}>Tu nombre</label>
-            <input type="text" value={playerName}
-              onChange={(e) => { setPlayerName(e.target.value); if (nameError) setNameError(false); }}
-              onKeyDown={(e) => { if (e.key === "Enter") startGame(); }}
-              placeholder="Ej. Juan Pérez" maxLength={40}
-              className="w-full mt-1 rounded-xl px-4 py-3 text-base outline-none"
-              style={{ border: `2px solid ${nameError ? "#dc2626" : "#d1d5db"}` }} />
-            {nameError && <p className="text-xs text-red-600 mt-1">Escribe tu nombre para empezar.</p>}
+
+          <div style={{ padding: "0 20px 24px" }}>
+            {/* Nombre */}
+            <div style={{ marginTop: 20 }}>
+              <label style={{ fontSize: 17, fontWeight: 800, color: NAVY, display: "block", marginBottom: 8 }}>
+                👷 Tu nombre
+              </label>
+              <input type="text" value={playerName}
+                onChange={(e) => { setPlayerName(e.target.value); if (nameError) setNameError(false); }}
+                onKeyDown={(e) => { if (e.key === "Enter") startGame(); }}
+                placeholder="Ej. Juan Pérez" maxLength={40}
+                style={{
+                  width: "100%", padding: "16px 18px", fontSize: 18, borderRadius: 14,
+                  border: `3px solid ${nameError ? "#dc2626" : "#d1d5db"}`,
+                  outline: "none", boxSizing: "border-box", fontWeight: 600,
+                }} />
+              {nameError && <p style={{ color: "#dc2626", fontSize: 14, marginTop: 6, fontWeight: 600 }}>⚠️ Escribe tu nombre para empezar.</p>}
+            </div>
+
+            {/* Los 7 tachos */}
+            <div style={{ marginTop: 20 }}>
+              <p style={{ fontSize: 13, fontWeight: 800, color: "#666", textAlign: "center", marginBottom: 10, textTransform: "uppercase", letterSpacing: 1 }}>Los 7 tachos</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+                {BINS.map((b) => <Chip key={b.id} bin={b} />)}
+              </div>
+            </div>
+
+            {/* Botones */}
+            <button onClick={startGame} style={{
+              width: "100%", marginTop: 24, padding: "20px", background: BLUE, color: "#fff",
+              border: "none", borderRadius: 16, fontSize: 20, fontWeight: 900, cursor: "pointer",
+              boxShadow: "0 6px 20px rgba(27,157,217,0.4)", letterSpacing: 0.5,
+            }}>▶ INICIAR JUEGO</button>
+
+            <button onClick={openRanking} style={{
+              width: "100%", marginTop: 12, padding: "16px", background: "#eef2f7", color: NAVY,
+              border: "none", borderRadius: 16, fontSize: 17, fontWeight: 800, cursor: "pointer",
+            }}>🏆 Ver ranking</button>
           </div>
-          <div className="mt-5">
-            <p className="text-xs font-bold text-gray-500 mb-2 text-center">LOS 7 TACHOS</p>
-            <div className="flex flex-wrap justify-center gap-2">{BINS.map((b) => <Chip key={b.id} bin={b} />)}</div>
-          </div>
-          <button onClick={startGame} className="w-full mt-6 rounded-xl py-4 text-white font-extrabold text-lg transition transform hover:scale-105 active:scale-95 shadow-md" style={{ background: BLUE }}>▶ Iniciar juego</button>
-          <button onClick={openRanking} className="w-full mt-3 rounded-xl py-3 font-bold transition active:scale-95" style={{ background: "#eef2f7", color: NAVY }}>🏆 Ver ranking</button>
         </div>
-        <p className="text-center text-xs text-gray-400 mt-4">C. MEJÍA S.A.C. — Contratistas Generales · Tu compromiso es indispensable</p>
+        <p style={{ textAlign: "center", fontSize: 12, color: "#888", marginTop: 16 }}>
+          C. MEJÍA S.A.C. · Tu compromiso es indispensable
+        </p>
       </div>
     </div>
   );
 
+  // ── RANKING ──────────────────────────────────────────────────────
   if (screen === "ranking") return (
     <div style={wrap}>
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-2xl shadow-lg p-6">
-          <div className="flex justify-between items-center flex-wrap gap-3">
-            <Logo scale={0.85} />
-            <span className="text-2xl font-extrabold" style={{ color: NAVY }}>🏆 Ranking</span>
+      <div style={{ maxWidth: 680, margin: "0 auto", padding: "24px 16px" }}>
+        <div style={{ background: "#fff", borderRadius: 24, boxShadow: "0 8px 32px rgba(0,0,0,0.10)", overflow: "hidden" }}>
+          <div style={{ background: NAVY, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Logo scale={0.9} />
+            <span style={{ color: "#fff", fontSize: 22, fontWeight: 900 }}>🏆 Ranking</span>
           </div>
-          {boardLoading ? (
-            <p className="text-center text-gray-500 py-10">Cargando…</p>
-          ) : sortedBoard.length === 0 ? (
-            <p className="text-center text-gray-500 py-10">Aún no hay resultados. ¡Sé el primero!</p>
-          ) : (
-            <div className="space-y-2 mt-5">
-              {sortedBoard.map((r, i) => {
-                const acc = Math.round((r.correct / r.total) * 100);
-                const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : null;
-                return (
-                  <div key={i} className="flex items-center gap-3 rounded-xl shadow-sm px-3 py-2" style={{ background: i < 3 ? "#f3f9ff" : "#f8fafc" }}>
-                    <div className="w-8 text-center text-lg font-extrabold" style={{ color: NAVY }}>{medal || i + 1}</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-bold truncate" style={{ color: NAVY }}>{r.name}</div>
-                      <div className="text-xs text-gray-500">✅ {acc}% · ⏱️ {formatTime(r.timeSec)} · {fmtDate(r.date)}</div>
+          <div style={{ padding: "20px" }}>
+            {boardLoading ? <p style={{ textAlign: "center", color: "#888", padding: 40 }}>Cargando…</p>
+              : sortedBoard.length === 0 ? <p style={{ textAlign: "center", color: "#888", padding: 40, fontSize: 16 }}>Aún no hay resultados. ¡Sé el primero!</p>
+              : <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 8 }}>
+                  {sortedBoard.map((r, i) => {
+                    const acc = Math.round((r.correct / r.total) * 100);
+                    const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i+1}`;
+                    return (
+                      <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, background: i < 3 ? "#eaf6fd" : "#f8fafc", borderRadius: 14, padding: "12px 16px" }}>
+                        <div style={{ width: 36, textAlign: "center", fontSize: i < 3 ? 24 : 16, fontWeight: 900, color: NAVY }}>{medal}</div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontWeight: 800, fontSize: 16, color: NAVY, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.name}</div>
+                          <div style={{ fontSize: 13, color: "#666", marginTop: 2 }}>✅ {acc}% · ⏱️ {formatTime(r.timeSec)} · {fmtDate(r.date)}</div>
+                        </div>
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ fontSize: 22, fontWeight: 900, color: BLUE }}>{r.score}</div>
+                          <div style={{ fontSize: 12, color: "#aaa" }}>pts</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+            }
+            {sortedBoard.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 20 }}>
+                <button onClick={copyCSV} style={{ padding: "12px 18px", background: NAVY, color: "#fff", border: "none", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: "pointer" }}>{copied ? "✓ Copiado" : "📋 Copiar CSV"}</button>
+                <button onClick={downloadCSV} style={{ padding: "12px 18px", background: "#eef2f7", color: NAVY, border: "none", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: "pointer" }}>⬇️ Descargar CSV</button>
+                {!confirmClear
+                  ? <button onClick={() => setConfirmClear(true)} style={{ padding: "12px 18px", background: "#fef2f2", color: "#dc2626", border: "none", borderRadius: 12, fontSize: 15, fontWeight: 700, cursor: "pointer" }}>🗑️ Limpiar</button>
+                  : <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: 14, color: "#666" }}>¿Borrar todo?</span>
+                      <button onClick={clearBoard} style={{ padding: "10px 16px", background: "#dc2626", color: "#fff", border: "none", borderRadius: 10, fontWeight: 700, cursor: "pointer" }}>Sí</button>
+                      <button onClick={() => setConfirmClear(false)} style={{ padding: "10px 16px", background: "#e5e7eb", border: "none", borderRadius: 10, fontWeight: 700, cursor: "pointer" }}>No</button>
                     </div>
-                    <div className="text-right"><div className="text-xl font-extrabold" style={{ color: BLUE }}>{r.score}</div><div className="text-xs text-gray-400">pts</div></div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-          {sortedBoard.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-5">
-              <button onClick={copyCSV} className="rounded-lg px-4 py-2 font-bold text-white" style={{ background: NAVY }}>{copied ? "✓ Copiado" : "📋 Copiar CSV"}</button>
-              <button onClick={downloadCSV} className="rounded-lg px-4 py-2 font-bold" style={{ background: "#eef2f7", color: NAVY }}>⬇️ Descargar CSV</button>
-              {!confirmClear
-                ? <button onClick={() => setConfirmClear(true)} className="rounded-lg px-4 py-2 font-bold text-red-600 bg-red-50">🗑️ Limpiar</button>
-                : <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-600">¿Borrar todo?</span>
-                    <button onClick={clearBoard} className="rounded-lg px-3 py-2 font-bold text-white bg-red-600">Sí</button>
-                    <button onClick={() => setConfirmClear(false)} className="rounded-lg px-3 py-2 font-bold bg-gray-200">No</button>
-                  </div>
-              }
-            </div>
-          )}
-          <button onClick={() => setScreen("start")} className="w-full mt-6 rounded-xl py-3 font-bold text-white" style={{ background: BLUE }}>← Volver</button>
+                }
+              </div>
+            )}
+            <button onClick={() => setScreen("start")} style={{ width: "100%", marginTop: 20, padding: "16px", background: BLUE, color: "#fff", border: "none", borderRadius: 14, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>← Volver</button>
+          </div>
         </div>
       </div>
     </div>
   );
 
+  // ── FIN ──────────────────────────────────────────────────────────
   if (screen === "end") {
     const total = order.length;
     const acc = Math.round((correctCount / total) * 100);
@@ -372,43 +399,55 @@ export default function App() {
     if (acc === 100) { rating = "¡Maestro del reciclaje!"; emo = "🌟"; }
     else if (acc >= 85) { rating = "¡Excelente trabajo!"; emo = "🌿"; }
     else if (acc >= 70) { rating = "¡Muy bien!"; emo = "👍"; }
-    else if (acc >= 50) { rating = "Vas bien, sigue practicando"; emo = "💪"; }
+    else if (acc >= 50) { rating = "Sigue practicando"; emo = "💪"; }
     else { rating = "A reforzar la segregación"; emo = "📚"; }
     return (
       <div style={wrap}>
-        <div className="max-w-3xl mx-auto px-4 py-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <div className="flex justify-center"><Logo /></div>
-            <div className="flex flex-col items-center mt-3">
-              <Mascot type={acc >= 70 ? "female" : "male"} size={120} />
-              <div className="text-5xl mt-1">{emo}</div>
-              <h2 className="text-2xl font-extrabold mt-1" style={{ color: NAVY }}>{rating}</h2>
-              <p className="text-sm text-gray-500">{nameRef.current}</p>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
-              <div className="bg-gray-100 rounded-xl p-3 text-center"><div className="text-2xl font-extrabold" style={{ color: BLUE }}>{score}</div><div className="text-xs text-gray-500">Puntos</div></div>
-              <div className="bg-gray-100 rounded-xl p-3 text-center"><div className="text-2xl font-extrabold" style={{ color: BLUE }}>{correctCount}/{total}</div><div className="text-xs text-gray-500">Aciertos</div></div>
-              <div className="bg-gray-100 rounded-xl p-3 text-center"><div className="text-2xl font-extrabold" style={{ color: BLUE }}>{acc}%</div><div className="text-xs text-gray-500">Precisión</div></div>
-              <div className="bg-gray-100 rounded-xl p-3 text-center"><div className="text-2xl font-extrabold" style={{ color: BLUE }}>⏱️ {formatTime(finalTime)}</div><div className="text-xs text-gray-500">Tiempo</div></div>
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-3">Mejor racha: 🔥 {bestStreak}</p>
-            {mistakes.length > 0 && (
-              <div className="mt-6">
-                <p className="font-bold text-sm mb-2" style={{ color: NAVY }}>Para repasar:</p>
-                <div className="space-y-2">
-                  {mistakes.map((m, i) => (
-                    <div key={i} className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
-                      <span className="text-sm">{m.emoji} {m.name}</span>
-                      <Chip bin={BIN_BY_ID[m.bin]} />
-                    </div>
-                  ))}
-                </div>
+        <div style={{ maxWidth: 680, margin: "0 auto", padding: "24px 16px" }}>
+          <div style={{ background: "#fff", borderRadius: 24, boxShadow: "0 8px 32px rgba(0,0,0,0.10)", overflow: "hidden" }}>
+            <div style={{ background: NAVY, padding: "16px 20px" }}><Logo /></div>
+            <div style={{ padding: "24px 20px" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+                <Mascot type={acc >= 70 ? "female" : "male"} size={180} />
+                <div style={{ fontSize: 52 }}>{emo}</div>
+                <h2 style={{ color: NAVY, fontSize: 26, fontWeight: 900, textAlign: "center", margin: 0 }}>{rating}</h2>
+                <p style={{ color: "#666", fontSize: 16, margin: 0 }}>{nameRef.current}</p>
               </div>
-            )}
-            <div className="flex flex-wrap gap-3 mt-7">
-              <button onClick={startGame} className="flex-1 rounded-xl py-3 text-white font-bold" style={{ background: BLUE }}>🔄 Jugar de nuevo</button>
-              <button onClick={openRanking} className="rounded-xl py-3 px-5 font-bold text-white" style={{ background: NAVY }}>🏆 Ranking</button>
-              <button onClick={() => setScreen("start")} className="rounded-xl py-3 px-5 font-bold text-gray-600 bg-gray-200">Inicio</button>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 10, marginTop: 24 }}>
+                {[
+                  { val: score, label: "Puntos" },
+                  { val: `${correctCount}/${total}`, label: "Aciertos" },
+                  { val: `${acc}%`, label: "Precisión" },
+                  { val: `⏱️${formatTime(finalTime)}`, label: "Tiempo" },
+                ].map((s, i) => (
+                  <div key={i} style={{ background: "#f0f9ff", borderRadius: 14, padding: "14px 8px", textAlign: "center" }}>
+                    <div style={{ fontSize: 22, fontWeight: 900, color: BLUE }}>{s.val}</div>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: "#666", marginTop: 2 }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+              <p style={{ textAlign: "center", fontSize: 15, color: "#666", marginTop: 10 }}>Mejor racha: 🔥 {bestStreak}</p>
+
+              {mistakes.length > 0 && (
+                <div style={{ marginTop: 20 }}>
+                  <p style={{ fontWeight: 800, fontSize: 16, color: NAVY, marginBottom: 10 }}>📋 Para repasar:</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {mistakes.map((m, i) => (
+                      <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#fef9f0", borderRadius: 12, padding: "12px 14px", border: "1px solid #fde68a" }}>
+                        <span style={{ fontSize: 16, fontWeight: 700 }}>{m.emoji} {m.name}</span>
+                        <Chip bin={BIN_BY_ID[m.bin]} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24 }}>
+                <button onClick={startGame} style={{ flex: 1, minWidth: 120, padding: "18px", background: BLUE, color: "#fff", border: "none", borderRadius: 14, fontSize: 17, fontWeight: 900, cursor: "pointer", boxShadow: "0 4px 14px rgba(27,157,217,0.35)" }}>🔄 Jugar de nuevo</button>
+                <button onClick={openRanking} style={{ padding: "18px 20px", background: NAVY, color: "#fff", border: "none", borderRadius: 14, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>🏆</button>
+                <button onClick={() => setScreen("start")} style={{ padding: "18px 20px", background: "#e5e7eb", color: "#374151", border: "none", borderRadius: 14, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>🏠</button>
+              </div>
             </div>
           </div>
         </div>
@@ -416,52 +455,82 @@ export default function App() {
     );
   }
 
+  // ── JUEGO ────────────────────────────────────────────────────────
   const item = order[idx];
   const correctBin = BIN_BY_ID[item.bin];
   return (
     <div style={wrap}>
-      <div className="max-w-4xl mx-auto px-4 py-5">
-        <div className="bg-white rounded-2xl shadow p-3 flex items-center justify-between flex-wrap gap-3">
+      <div style={{ maxWidth: 780, margin: "0 auto", padding: "12px 12px 24px" }}>
+        {/* Header */}
+        <div style={{ background: "#fff", borderRadius: 18, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
           <Logo scale={0.85} />
-          <div className="flex items-center gap-2 flex-wrap">
-            <div className="rounded-lg px-3 py-1 text-center" style={{ background: NAVY }}>
-              <div className="text-white font-extrabold text-lg leading-none">⏱️ {formatTime(elapsed)}</div>
-              <div className="text-xs text-blue-100">Tiempo</div>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <div style={{ background: NAVY, borderRadius: 12, padding: "8px 14px", textAlign: "center" }}>
+              <div style={{ color: "#fff", fontWeight: 900, fontSize: 18, lineHeight: 1 }}>⏱️ {formatTime(elapsed)}</div>
+              <div style={{ color: "#93c5fd", fontSize: 11, fontWeight: 600 }}>Tiempo</div>
             </div>
-            <div className="rounded-lg px-3 py-1 text-center bg-gray-100"><div className="font-extrabold text-lg leading-none" style={{ color: BLUE }}>{score}</div><div className="text-xs text-gray-500">Puntos</div></div>
-            <div className="rounded-lg px-3 py-1 text-center bg-gray-100"><div className="font-extrabold text-lg leading-none text-orange-500">🔥 {streak}</div><div className="text-xs text-gray-500">Racha</div></div>
+            <div style={{ background: "#f0f9ff", borderRadius: 12, padding: "8px 14px", textAlign: "center" }}>
+              <div style={{ color: BLUE, fontWeight: 900, fontSize: 18, lineHeight: 1 }}>{score}</div>
+              <div style={{ color: "#666", fontSize: 11, fontWeight: 600 }}>Puntos</div>
+            </div>
+            <div style={{ background: "#fff7ed", borderRadius: 12, padding: "8px 14px", textAlign: "center" }}>
+              <div style={{ color: "#f97316", fontWeight: 900, fontSize: 18, lineHeight: 1 }}>🔥 {streak}</div>
+              <div style={{ color: "#666", fontSize: 11, fontWeight: 600 }}>Racha</div>
+            </div>
           </div>
         </div>
-        <div className="mt-4">
-          <div className="flex justify-between text-xs font-semibold text-gray-500 mb-1">
-            <span>Residuo {idx + 1} de {order.length}</span><span>Aciertos: {correctCount}</span>
+
+        {/* Progreso */}
+        <div style={{ marginTop: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 700, color: "#555", marginBottom: 6 }}>
+            <span>Residuo {idx + 1} de {order.length}</span>
+            <span>✅ Aciertos: {correctCount}</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-            <div className="h-2 rounded-full transition-all" style={{ width: `${((idx + 1) / order.length) * 100}%`, background: BLUE }} />
-          </div>
-        </div>
-        <div className="bg-white rounded-2xl shadow-lg p-4 mt-4 flex items-center gap-2">
-          <div className="shrink-0"><Mascot type="male" size={80} /></div>
-          <div className="flex-1 text-center">
-            <p className="text-sm font-semibold text-gray-500">¿A qué tacho va este residuo?</p>
-            <div className="text-7xl my-2">{item.emoji}</div>
-            <h2 className="text-xl sm:text-2xl font-extrabold" style={{ color: NAVY }}>{item.name}</h2>
+          <div style={{ background: "#d1d5db", borderRadius: 8, height: 10, overflow: "hidden" }}>
+            <div style={{ width: `${((idx + 1) / order.length) * 100}%`, background: BLUE, height: "100%", borderRadius: 8, transition: "width 0.4s" }} />
           </div>
         </div>
-        <div className="mt-3" style={{ minHeight: 64 }}>
+
+        {/* Tarjeta residuo */}
+        <div style={{ background: "#fff", borderRadius: 20, boxShadow: "0 6px 24px rgba(0,0,0,0.09)", padding: "20px 16px", marginTop: 14, display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ flexShrink: 0 }}>
+            <Mascot type="male" size={110} />
+          </div>
+          <div style={{ flex: 1, textAlign: "center" }}>
+            <p style={{ fontSize: 15, fontWeight: 700, color: "#666", margin: "0 0 4px" }}>¿A qué tacho va este residuo?</p>
+            <div style={{ fontSize: 80, lineHeight: 1, margin: "8px 0" }}>{item.emoji}</div>
+            <h2 style={{ color: NAVY, fontSize: 22, fontWeight: 900, margin: 0, lineHeight: 1.2 }}>{item.name}</h2>
+          </div>
+        </div>
+
+        {/* Feedback */}
+        <div style={{ minHeight: 72, marginTop: 12 }}>
           {answered && answered.correct && (
-            <div className="rounded-xl px-4 py-3 text-center font-bold text-white" style={{ background: "#16a34a" }}>✅ ¡Correcto! +{lastGain} pts</div>
+            <div style={{ background: "#16a34a", borderRadius: 16, padding: "16px 20px", textAlign: "center", color: "#fff", fontSize: 18, fontWeight: 900 }}>
+              ✅ ¡Correcto! +{lastGain} pts
+            </div>
           )}
           {answered && !answered.correct && (
-            <div className="rounded-xl px-4 py-3" style={{ background: "#fdecea", border: "1px solid #f5b7b1" }}>
-              <p className="font-bold text-red-700">❌ Va en el tacho {correctBin.name} ({correctBin.short})</p>
-              <p className="text-sm text-gray-700 mt-1">{item.reason}</p>
-              <button onClick={advance} className="mt-2 rounded-lg px-5 py-2 text-white font-bold" style={{ background: NAVY }}>Siguiente ▶</button>
+            <div style={{ background: "#fef2f2", border: "2px solid #fca5a5", borderRadius: 16, padding: "16px 20px" }}>
+              <p style={{ color: "#dc2626", fontWeight: 900, fontSize: 17, margin: "0 0 6px" }}>
+                ❌ Va en el tacho <span style={{ textTransform: "uppercase" }}>{correctBin.name}</span> ({correctBin.short})
+              </p>
+              {item.reason.split("\n").map((line, i) => (
+                <p key={i} style={{ color: "#374151", fontSize: 15, margin: "4px 0", fontWeight: i === 0 ? 600 : 700 }}>{line}</p>
+              ))}
+              <button onClick={advance} style={{ marginTop: 12, padding: "14px 28px", background: NAVY, color: "#fff", border: "none", borderRadius: 12, fontSize: 16, fontWeight: 800, cursor: "pointer" }}>
+                Siguiente ▶
+              </button>
             </div>
           )}
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 mt-3">
-          {BINS.map((b) => <Bin key={b.id} bin={b} onPick={handlePick} answered={answered} item={item} />)}
+
+        {/* Tachos */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginTop: 14 }}>
+          {BINS.slice(0, 4).map((b) => <Bin key={b.id} bin={b} onPick={handlePick} answered={answered} item={item} />)}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginTop: 10 }}>
+          {BINS.slice(4).map((b) => <Bin key={b.id} bin={b} onPick={handlePick} answered={answered} item={item} />)}
         </div>
       </div>
     </div>
