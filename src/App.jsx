@@ -15,32 +15,40 @@ const BINS = [
 const BIN_BY_ID = Object.fromEntries(BINS.map((b) => [b.id, b]));
 
 const ITEMS = [
-  { id: "carton",     name: "Cartones",                      emoji: "📦", bin: "papel",      reason: "Los cartones son reciclables: van al tacho azul." },
-  { id: "papel",      name: "Papeles",                       emoji: "📄", bin: "papel",      reason: "Todo papel limpio va al tacho azul." },
-  { id: "planos",     name: "Impresión de planos",           emoji: "📐", bin: "papel",      reason: "Los planos impresos son papel: van al tacho azul." },
-  { id: "folder",     name: "Folders",                       emoji: "🗂️", bin: "papel",      reason: "Los folders de papel van al tacho azul." },
-  { id: "clavos",     name: "Clavos",                        emoji: "📌", bin: "metalicos",  reason: "Los clavos son metálicos: van al tacho amarillo." },
-  { id: "fierros",    name: "Retazos de fierros",            emoji: "🔧", bin: "metalicos",  reason: "Los retazos de fierro van al tacho amarillo." },
-  { id: "pernos",     name: "Pernos",                        emoji: "🔩", bin: "metalicos",  reason: "Los pernos son metálicos: van al tacho amarillo." },
-  { id: "envmetal",   name: "Envases metálicos limpios",     emoji: "🥫", bin: "metalicos",  reason: "Envases metálicos limpios van al tacho amarillo." },
-  { id: "botgaseosa", name: "Botella de gaseosa limpia",     emoji: "🥤", bin: "plasticos",  reason: "Botellas de plástico limpias van al tacho blanco." },
-  { id: "botagua",    name: "Botella de agua limpia",        emoji: "💧", bin: "plasticos",  reason: "Botellas de agua limpias van al tacho blanco." },
-  { id: "vidrio",     name: "Vidrio",                        emoji: "🪟", bin: "vidrios",    reason: "Todo vidrio, limpio o roto, va al tacho plomo." },
-  { id: "guantes",    name: "Guantes con aceite",            emoji: "🧤", bin: "peligrosos", reason: "Guantes impregnados de aceite son peligrosos: tacho rojo." },
-  { id: "tyvek",      name: "Tyvek con aceite",              emoji: "🦺", bin: "peligrosos", reason: "El tyvek con aceite es residuo peligroso: tacho rojo." },
-  { id: "cinta",      name: "Cinta con restos de cemento",   emoji: "🎗️", bin: "peligrosos", reason: "Cinta de seguridad con cemento es peligrosa: tacho rojo." },
-  { id: "baldepint",  name: "Balde de pintura",              emoji: "🪣", bin: "peligrosos", reason: "Los baldes de pintura son residuo peligroso: tacho rojo." },
-  { id: "madera",     name: "Madera con restos de concreto", emoji: "🪵", bin: "peligrosos", reason: "Madera contaminada con concreto va al tacho rojo." },
-  { id: "pilas",      name: "Pilas / baterías",              emoji: "🔋", bin: "peligrosos", reason: "Las pilas y baterías son peligrosas: tacho rojo." },
-  { id: "bidon",      name: "Bidón de combustible",          emoji: "🛢️", bin: "peligrosos", reason: "Bidones de combustible son peligrosos: tacho rojo." },
-  { id: "quimicos",   name: "Aditivos químicos",             emoji: "🧪", bin: "peligrosos", reason: "Los aditivos químicos son peligrosos: tacho rojo." },
-  { id: "senaliz",    name: "Señalización en mal estado",    emoji: "🚧", bin: "noaprov",    reason: "La señalización deteriorada no es aprovechable: tacho negro." },
-  { id: "botresid",   name: "Botellas con residuos",         emoji: "🍶", bin: "noaprov",    reason: "Botellas contaminadas no son reciclables: van al tacho negro." },
-  { id: "eppsdet",    name: "EPPs deteriorados",             emoji: "🥾", bin: "noaprov",    reason: "Los EPPs en mal estado van al tacho negro." },
-  { id: "lentesrot",  name: "Lentes de seguridad rotos",     emoji: "🥽", bin: "noaprov",    reason: "Lentes de seguridad rotos van al tacho negro." },
-  { id: "tyvekrot",   name: "Tyvek roto",                    emoji: "🦺", bin: "noaprov",    reason: "El tyvek roto sin contaminantes va al tacho negro." },
-  { id: "tecnopor",   name: "Tecnopor",                      emoji: "🧊", bin: "noaprov",    reason: "El tecnopor no es aprovechable: tacho negro." },
-  { id: "frutas",     name: "Restos de frutas",              emoji: "🍌", bin: "organicos",  reason: "Los restos de frutas son orgánicos: van al tacho marrón." },
+  // 🔵 AZUL
+  { id: "carton",     name: "Cartones",                        emoji: "📦", bin: "papel",      reason: "Los cartones son reciclables: van al tacho azul." },
+  { id: "papel",      name: "Papeles",                         emoji: "📄", bin: "papel",      reason: "Todo papel limpio va al tacho azul." },
+  { id: "planos",     name: "Impresión de planos",             emoji: "📐", bin: "papel",      reason: "Los planos impresos son papel: van al tacho azul." },
+  { id: "folder",     name: "Folders",                         emoji: "🗂️", bin: "papel",      reason: "Los folders de papel van al tacho azul." },
+  // 🟡 AMARILLO
+  { id: "clavos",     name: "Clavos",                          emoji: "📌", bin: "metalicos",  reason: "Los clavos son metálicos: van al tacho amarillo." },
+  { id: "fierros",    name: "Retazos de fierros",              emoji: "🔧", bin: "metalicos",  reason: "Los retazos de fierro van al tacho amarillo." },
+  { id: "pernos",     name: "Pernos",                          emoji: "🔩", bin: "metalicos",  reason: "Los pernos son metálicos: van al tacho amarillo." },
+  { id: "envmetal",   name: "Envases metálicos limpios",       emoji: "🥫", bin: "metalicos",  reason: "Envases metálicos limpios van al tacho amarillo." },
+  // ⚪ BLANCO
+  { id: "botgaseosa", name: "Botella de gaseosa limpia",       emoji: "🥤", bin: "plasticos",  reason: "Botellas de plástico limpias van al tacho blanco." },
+  { id: "botagua",    name: "Botella de agua limpia",          emoji: "💧", bin: "plasticos",  reason: "Botellas de agua limpias van al tacho blanco." },
+  // 🩶 PLOMO
+  { id: "vidrio",     name: "Vidrio",                          emoji: "🪟", bin: "vidrios",    reason: "Todo vidrio, limpio o roto, va al tacho plomo." },
+  // 🔴 ROJO
+  { id: "guantes",    name: "Guantes con aceite",              emoji: "🧤", bin: "peligrosos", reason: "Guantes impregnados de aceite son peligrosos: tacho rojo." },
+  { id: "tyvek",      name: "Tyvek contaminado",               emoji: "🦺", bin: "peligrosos", reason: "El tyvek contaminado es residuo peligroso: tacho rojo." },
+  { id: "cinta",      name: "Cinta con restos de cemento",     emoji: "🎗️", bin: "peligrosos", reason: "Cinta de seguridad con cemento es peligrosa: tacho rojo." },
+  { id: "baldepint",  name: "Baldes de pintura",               emoji: "🪣", bin: "peligrosos", reason: "Los baldes de pintura son residuo peligroso: tacho rojo." },
+  { id: "madera",     name: "Madera con restos de concreto",   emoji: "🪵", bin: "peligrosos", reason: "Madera contaminada con concreto va al tacho rojo." },
+  { id: "pilas",      name: "Pilas / baterías",                emoji: "🔋", bin: "peligrosos", reason: "Las pilas y baterías son peligrosas: tacho rojo." },
+  { id: "bidon",      name: "Bidones de combustible",          emoji: "🛢️", bin: "peligrosos", reason: "Bidones de combustible son peligrosos: tacho rojo." },
+  { id: "quimicos",   name: "Aditivos químicos",               emoji: "🧪", bin: "peligrosos", reason: "Los aditivos químicos son peligrosos: tacho rojo." },
+  // ⚫ NEGRO
+  { id: "senaliz",    name: "Señalización en mal estado",      emoji: "🚧", bin: "noaprov",    reason: "La señalización deteriorada no es aprovechable: tacho negro." },
+  { id: "botresid",   name: "Botellas con residuos",           emoji: "🍶", bin: "noaprov",    reason: "Botellas contaminadas no son reciclables: van al tacho negro." },
+  { id: "tecnopor",   name: "Tecnopor",                        emoji: "🧊", bin: "noaprov",    reason: "El tecnopor no es aprovechable: tacho negro." },
+  { id: "eppsdet",    name: "EPPs deteriorados",               emoji: "🥾", bin: "noaprov",    reason: "⚠️ EPPs deteriorados van al tacho negro. Recuerda: entrega los EPPs rotos o en mal estado al almacén para su reposición." },
+  { id: "lentesrot",  name: "Lentes de seguridad rotos",       emoji: "🥽", bin: "noaprov",    reason: "⚠️ Los lentes rotos van al tacho negro. Recuerda: entrega los lentes dañados al almacén para su reposición." },
+  { id: "cascodet",   name: "Casco deteriorado",               emoji: "⛑️", bin: "noaprov",    reason: "⚠️ El casco deteriorado va al tacho negro. Recuerda: entrega los cascos dañados al almacén para su reposición." },
+  { id: "arnesdet",   name: "Arnés deteriorado",               emoji: "🦺", bin: "noaprov",    reason: "⚠️ El arnés deteriorado va al tacho negro. Recuerda: entrega los arneses dañados al almacén para su reposición." },
+  // 🟤 MARRÓN
+  { id: "frutas",     name: "Restos de frutas",                emoji: "🍌", bin: "organicos",  reason: "Los restos de frutas son orgánicos: van al tacho marrón." },
 ];
 
 const ROUND_COUNT = 12;
@@ -62,117 +70,14 @@ function fmtDate(iso) {
   return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
-// ── Muñequitos SVG CMEJIA ──────────────────────────────────────────
-const C = {
-  navy:"#1F3864", navyD:"#16284D", lime:"#C8D400", limeD:"#A8B200",
-  white:"#F5F7FA", whiteD:"#DDE2EA", skin:"#E8A87C", hair:"#2A1F1A",
-  boot:"#7A4A24", refl:"#E8EEF4", lens:"#BDD8F0",
-};
-
-function HardHat({ cx = 105, y = 30 }) {
-  return <>
-    <ellipse cx={cx} cy={y + 38} rx={38} ry={9} fill={C.whiteD} />
-    <path d={`M${cx - 30} ${y + 36} a30 28 0 0 1 60 0 z`} fill={C.white} />
-    <rect x={cx - 6} y={y + 14} width={12} height={10} rx={4} fill={C.whiteD} />
-    <circle cx={cx} cy={y + 28} r={5} fill="#1B9DD9" />
-  </>;
-}
-function Glasses({ cx = 105, ey = 82 }) {
-  return <g stroke={C.navy} strokeWidth={2.5} fill={C.lens}>
-    <rect x={cx - 22} y={ey} width={18} height={12} rx={4} />
-    <rect x={cx + 4} y={ey} width={18} height={12} rx={4} />
-    <line x1={cx - 4} y1={ey + 6} x2={cx + 4} y2={ey + 6} />
-    <line x1={cx - 40} y1={ey + 5} x2={cx - 22} y2={ey + 5} fill="none" />
-    <line x1={cx + 22} y1={ey + 5} x2={cx + 40} y2={ey + 5} fill="none" />
-  </g>;
-}
-function Badge({ cx = 110, ty = 170 }) {
-  return <g>
-    <rect x={cx - 18} y={ty} width={36} height={18} rx={3} fill={C.white} opacity={0.9} />
-    <text x={cx} y={ty + 7} textAnchor="middle" fontSize={5} fontWeight="bold" fill="#1B9DD9">CMEJIA</text>
-    <text x={cx} y={ty + 14} textAnchor="middle" fontSize={4} fill={C.navy}>S.A.C.</text>
-  </g>;
-}
-
-function MascotMale({ size = 130 }) {
-  return <svg width={size} height={size * 1.75} viewBox="0 0 210 370" style={{ display: "block" }}>
-    <rect x={84} y={240} width={24} height={90} rx={10} fill={C.navy} />
-    <rect x={106} y={240} width={24} height={90} rx={10} fill={C.navy} />
-    <rect x={84} y={308} width={24} height={7} fill={C.refl} />
-    <rect x={106} y={308} width={24} height={7} fill={C.refl} />
-    <path d="M82 330 h26 v8 q0 7-7 7 H74 q-7 0-7-7 q0-8 15-8 z" fill={C.boot} />
-    <path d="M108 330 h26 q15 0 15 8 q0 7-7 7 h-27 q-7 0-7-7 z" fill={C.boot} />
-    <path d="M82 175 C65 185 60 215 62 235" fill="none" stroke={C.navy} strokeWidth={18} strokeLinecap="round" />
-    <circle cx={62} cy={237} r={10} fill={C.skin} />
-    <path d="M128 175 C148 160 158 130 162 108" fill="none" stroke={C.navy} strokeWidth={18} strokeLinecap="round" />
-    <circle cx={163} cy={104} r={10} fill={C.skin} />
-    <rect x={159} y={84} width={8} height={20} rx={4} fill={C.skin} />
-    <rect x={78} y={155} width={64} height={100} rx={18} fill={C.navy} />
-    <path d="M88 155 h44 a10 10 0 0 1 10 10 v80 a10 10 0 0 1-10 10 h-44 a10 10 0 0 1-10-10 v-80 a10 10 0 0 1 10-10 z" fill={C.lime} />
-    <path d="M104 155 L110 172 L116 155 Z" fill={C.navy} />
-    <rect x={107} y={155} width={6} height={100} fill={C.limeD} />
-    <rect x={80} y={195} width={60} height={9} fill={C.refl} />
-    <rect x={80} y={216} width={60} height={9} fill={C.refl} />
-    <rect x={92} y={168} width={7} height={25} fill={C.refl} />
-    <rect x={121} y={168} width={7} height={25} fill={C.refl} />
-    <Badge />
-    <rect x={99} y={135} width={22} height={24} rx={8} fill={C.skin} />
-    <ellipse cx={110} cy={115} rx={30} ry={33} fill={C.skin} />
-    <circle cx={81} cy={117} r={7} fill={C.skin} />
-    <circle cx={139} cy={117} r={7} fill={C.skin} />
-    <path d="M82 106 C84 82 136 82 138 106 C130 94 118 88 110 88 C102 88 90 94 82 106 Z" fill={C.hair} />
-    <Glasses cx={110} ey={106} />
-    <circle cx={99} cy={112} r={3} fill="#222" />
-    <circle cx={121} cy={112} r={3} fill="#222" />
-    <path d="M103 125 q7 7 14 0" fill="none" stroke="#8B3A2A" strokeWidth={2.5} strokeLinecap="round" />
-    <HardHat cx={110} y={56} />
-  </svg>;
-}
-
-function MascotFemale({ size = 130 }) {
-  return <svg width={size} height={size * 1.75} viewBox="0 0 210 370" style={{ display: "block" }}>
-    <rect x={84} y={240} width={24} height={90} rx={10} fill={C.navy} />
-    <rect x={106} y={240} width={24} height={90} rx={10} fill={C.navy} />
-    <rect x={84} y={308} width={24} height={7} fill={C.refl} />
-    <rect x={106} y={308} width={24} height={7} fill={C.refl} />
-    <path d="M82 330 h26 v8 q0 7-7 7 H74 q-7 0-7-7 q0-8 15-8 z" fill={C.boot} />
-    <path d="M108 330 h26 q15 0 15 8 q0 7-7 7 h-27 q-7 0-7-7 z" fill={C.boot} />
-    <path d="M82 175 C68 188 64 212 64 232" fill="none" stroke={C.navy} strokeWidth={18} strokeLinecap="round" />
-    <circle cx={64} cy={234} r={10} fill={C.skin} />
-    <path d="M128 175 C148 158 160 128 164 108" fill="none" stroke={C.navy} strokeWidth={18} strokeLinecap="round" />
-    <circle cx={165} cy={104} r={10} fill={C.skin} />
-    <rect x={158} y={84} width={7} height={16} rx={3.5} fill={C.skin} />
-    <rect x={165} y={82} width={7} height={18} rx={3.5} fill={C.skin} />
-    <rect x={172} y={84} width={7} height={16} rx={3.5} fill={C.skin} />
-    <rect x={78} y={155} width={64} height={100} rx={18} fill={C.navy} />
-    <path d="M88 155 h44 a10 10 0 0 1 10 10 v80 a10 10 0 0 1-10 10 h-44 a10 10 0 0 1-10-10 v-80 a10 10 0 0 1 10-10 z" fill={C.lime} />
-    <path d="M104 155 L110 172 L116 155 Z" fill={C.navy} />
-    <rect x={107} y={155} width={6} height={100} fill={C.limeD} />
-    <rect x={80} y={195} width={60} height={9} fill={C.refl} />
-    <rect x={80} y={216} width={60} height={9} fill={C.refl} />
-    <rect x={92} y={168} width={7} height={25} fill={C.refl} />
-    <rect x={121} y={168} width={7} height={25} fill={C.refl} />
-    <Badge />
-    <rect x={99} y={135} width={22} height={24} rx={8} fill={C.skin} />
-    <ellipse cx={110} cy={114} rx={29} ry={32} fill={C.skin} />
-    <circle cx={82} cy={116} r={7} fill={C.skin} />
-    <circle cx={138} cy={116} r={7} fill={C.skin} />
-    <path d="M80 105 C80 78 140 78 140 105 L138 165 C138 172 126 172 125 165 L126 118 C120 138 100 138 94 118 L95 165 C94 172 82 172 81 165 Z" fill={C.hair} />
-    <path d="M82 105 C84 80 136 80 138 105 C128 92 92 92 82 105 Z" fill={C.hair} />
-    <Glasses cx={110} ey={105} />
-    <circle cx={99} cy={111} r={3} fill="#222" />
-    <circle cx={121} cy={111} r={3} fill="#222" />
-    <ellipse cx={110} cy={126} rx={5} ry={6} fill="#7A2E22" />
-    <HardHat cx={110} y={54} />
-  </svg>;
-}
-
 function Mascot({ type = "male", size = 130 }) {
-  if (type === "female") return <MascotFemale size={size} />;
-  return <MascotMale size={size} />;
+  const src = type === "female" ? "/mascot-female.jpg" : "/mascot-male.jpg";
+  return (
+    <img src={src} alt="CMEJIA"
+      style={{ height: size, width: "auto", objectFit: "contain", display: "block" }} />
+  );
 }
 
-// ── Logo CMEJIA ───────────────────────────────────────────────────
 function Logo({ scale = 1 }) {
   return (
     <div className="flex items-center gap-2">
@@ -198,7 +103,6 @@ function Logo({ scale = 1 }) {
   );
 }
 
-// ── Tacho cilindro ────────────────────────────────────────────────
 function Bin({ bin, onPick, answered, item }) {
   let ring = "none";
   if (answered) {
@@ -235,7 +139,6 @@ function Chip({ bin }) {
   );
 }
 
-// ── App principal ─────────────────────────────────────────────────
 export default function App() {
   const [screen, setScreen] = useState("start");
   const [playerName, setPlayerName] = useState("");
@@ -262,7 +165,6 @@ export default function App() {
   const correctRef = useRef(0);
   const nameRef = useRef("");
   const orderRef = useRef([]);
-
   const STORE_KEY = "cmejia_ranking_v1";
 
   function stopTick() { if (tickRef.current) { clearInterval(tickRef.current); tickRef.current = null; } }
@@ -372,7 +274,6 @@ export default function App() {
 
   const wrap = { minHeight: "100vh", background: "linear-gradient(160deg,#eef4fa 0%,#e3edf6 55%,#dbe7f3 100%)" };
 
-  // ── INICIO ───────────────────────────────────────────────────────
   if (screen === "start") return (
     <div style={wrap}>
       <div className="max-w-3xl mx-auto px-4 py-7">
@@ -414,7 +315,6 @@ export default function App() {
     </div>
   );
 
-  // ── RANKING ──────────────────────────────────────────────────────
   if (screen === "ranking") return (
     <div style={wrap}>
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -465,7 +365,6 @@ export default function App() {
     </div>
   );
 
-  // ── FIN ──────────────────────────────────────────────────────────
   if (screen === "end") {
     const total = order.length;
     const acc = Math.round((correctCount / total) * 100);
@@ -517,7 +416,6 @@ export default function App() {
     );
   }
 
-  // ── JUEGO ────────────────────────────────────────────────────────
   const item = order[idx];
   const correctBin = BIN_BY_ID[item.bin];
   return (
