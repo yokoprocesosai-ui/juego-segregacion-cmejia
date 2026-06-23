@@ -63,37 +63,22 @@ function fmtDate(iso) {
   return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
-// Muñequitos — imágenes reales CMEJIA
-function Mascot({ type = "male", size = 180 }) {
+// Muñequitos — imágenes reales CMEJIA sin fondo
+function Mascot({ type = "male", size = 220 }) {
   const src = type === "female" ? "/mascot-female.jpg" : "/mascot-male.jpg";
   return (
     <img src={src} alt="Trabajador CMEJIA"
-      style={{ height: size, width: "auto", objectFit: "contain", display: "block", filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))" }} />
+      style={{ height: size, width: "auto", objectFit: "contain", display: "block",
+        filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.18))",
+        mixBlendMode: "multiply",  // elimina fondo blanco sobre bg claro
+      }} />
   );
 }
 
 function Logo({ scale = 1 }) {
   return (
-    <div className="flex items-center gap-2">
-      <svg width={44 * scale} height={44 * scale} viewBox="0 0 64 64">
-        <path d="M4 58 L4 30 L22 22 L22 58 Z" fill={BLUE} />
-        <rect x="24" y="14" width="16" height="44" fill={BLUE} />
-        <path d="M42 58 L42 28 L58 28 L58 58 Z" fill="#7FC9ED" />
-        <rect x="28" y="20" width="3" height="3" fill="#fff" />
-        <rect x="33" y="20" width="3" height="3" fill="#fff" />
-        <rect x="28" y="27" width="3" height="3" fill="#fff" />
-        <rect x="33" y="27" width="3" height="3" fill="#fff" />
-        <path d="M2 60 Q30 52 62 60" stroke={BLUE} strokeWidth="3" fill="none" />
-      </svg>
-      <div className="leading-none">
-        <div className="font-extrabold tracking-tight" style={{ color: BLUE }}>
-          <span style={{ fontSize: 26 * scale }}>C</span>
-          <span style={{ fontSize: 22 * scale }}>MEJIA</span>
-          <span className="align-top ml-1" style={{ fontSize: 13 * scale }}>S.A.C.</span>
-        </div>
-        <div className="font-bold tracking-wide" style={{ color: BLUE, fontSize: 11 * scale }}>CONTRATISTAS GENERALES</div>
-      </div>
-    </div>
+    <img src="/logo-cmejia.jpg" alt="CMEJIA S.A.C."
+      style={{ height: 48 * scale, width: "auto", objectFit: "contain", display: "block" }} />
   );
 }
 
