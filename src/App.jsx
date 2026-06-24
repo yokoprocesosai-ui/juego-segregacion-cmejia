@@ -127,8 +127,35 @@ function playFX(type) {
         osc.start(ctx.currentTime + start);
         osc.stop(ctx.currentTime + start + 0.18);
       });
+    } else if (type === "victory") {
+      // Fanfarria de victoria — melodía ascendente + acorde final
+      const melody = [[523.25,0],[659.25,0.15],[783.99,0.30],[1046.5,0.45],[987.77,0.62],[1046.5,0.72]];
+      melody.forEach(([freq, start]) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        g.gain.setValueAtTime(0, ctx.currentTime + start);
+        g.gain.linearRampToValueAtTime(0.4, ctx.currentTime + start + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + 0.28);
+        osc.connect(g); g.connect(master);
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + 0.32);
+      });
+      // Acorde final do-mi-sol
+      [523.25, 659.25, 783.99].forEach(freq => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.value = freq;
+        g.gain.setValueAtTime(0, ctx.currentTime + 1.0);
+        g.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 1.03);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.8);
+        osc.connect(g); g.connect(master);
+        osc.start(ctx.currentTime + 1.0);
+        osc.stop(ctx.currentTime + 1.85);
+      });
     }
-    setTimeout(() => ctx.close(), 2000);
   } catch (e) {}
 }
 
@@ -318,6 +345,8 @@ export default function App() {
     stopTick(); music.stop();
     const t = (Date.now() - startRef.current) / 1000;
     setFinalTime(t);
+    const acc = Math.round((correctRef.current / orderRef.current.length) * 100);
+    setTimeout(() => playFX(acc >= 70 ? "victory" : "wrong"), 300);
     saveResult({ name: nameRef.current, score: scoreRef.current, correct: correctRef.current, total: orderRef.current.length, timeSec: Math.round(t), date: new Date().toISOString() });
     setScreen("end");
   }
