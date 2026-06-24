@@ -14,43 +14,36 @@ const BINS = [
 ];
 const BIN_BY_ID = Object.fromEntries(BINS.map((b) => [b.id, b]));
 
-const MSG_EPP = "⚠️ IMPORTANTE: Los EPPs en mal estado o rotos NO van a la basura común. Entrégalos al almacenero o al administrador para su correcta disposición y reposición inmediata.";
+const MSG_EPP = "⚠️ IMPORTANTE: Los EPPs en mal estado o rotos NO van a la basura común. Entrégalos al almacenero o administrador para su correcta disposición y reposición inmediata.";
 
 const ITEMS = [
-  // 🔵 AZUL — Papel y cartón
-  { id: "carton",     name: "Cartones",                        emoji: "📦", bin: "papel",      reason: "Los cartones son reciclables → tacho AZUL." },
-  { id: "papel",      name: "Papeles",                         emoji: "📄", bin: "papel",      reason: "Todo papel limpio → tacho AZUL." },
-  { id: "planos",     name: "Impresión de planos",             emoji: "📐", bin: "papel",      reason: "Los planos impresos son papel → tacho AZUL." },
-  { id: "folder",     name: "Folders",                         emoji: "🗂️", bin: "papel",      reason: "Los folders de papel → tacho AZUL." },
-  // 🟡 AMARILLO — Metálicos
-  { id: "clavos",     name: "Clavos",                          emoji: "📌", bin: "metalicos",  reason: "Los clavos son metálicos → tacho AMARILLO." },
-  { id: "fierros",    name: "Retazos de fierros",              emoji: "🔧", bin: "metalicos",  reason: "Los retazos de fierro → tacho AMARILLO." },
-  { id: "pernos",     name: "Pernos",                          emoji: "🔩", bin: "metalicos",  reason: "Los pernos son metálicos → tacho AMARILLO." },
-  { id: "envmetal",   name: "Envases metálicos limpios",       emoji: "🥫", bin: "metalicos",  reason: "Envases metálicos limpios → tacho AMARILLO." },
-  // ⚪ BLANCO — Plásticos
-  { id: "botgaseosa", name: "Botella de gaseosa limpia",       emoji: "🥤", bin: "plasticos",  reason: "Botellas de plástico limpias → tacho BLANCO." },
-  { id: "botagua",    name: "Botella de agua limpia",          emoji: "💧", bin: "plasticos",  reason: "Botellas de agua limpias → tacho BLANCO." },
-  // 🩶 PLOMO — Vidrios
-  { id: "vidrio",     name: "Vidrio",                          emoji: "🪟", bin: "vidrios",    reason: "Todo vidrio, limpio o roto → tacho PLOMO." },
-  // 🔴 ROJO — Peligrosos
-  { id: "guantes",    name: "Guantes con aceite",              emoji: "🧤", bin: "peligrosos", reason: "Guantes impregnados de aceite → PELIGROSO → tacho ROJO." },
-  { id: "tyvek",      name: "Tyvek contaminado",               emoji: "🦺", bin: "peligrosos", reason: "Tyvek contaminado → PELIGROSO → tacho ROJO." },
-  { id: "cinta",      name: "Cinta con restos de cemento",     emoji: "🎗️", bin: "peligrosos", reason: "Cinta de seguridad con cemento → PELIGROSA → tacho ROJO." },
-  { id: "baldepint",  name: "Baldes de pintura",               emoji: "🪣", bin: "peligrosos", reason: "Baldes de pintura → PELIGROSOS → tacho ROJO." },
-  { id: "madera",     name: "Madera con restos de concreto",   emoji: "🪵", bin: "peligrosos", reason: "Madera contaminada con concreto → PELIGROSA → tacho ROJO." },
-  { id: "pilas",      name: "Pilas / baterías",                emoji: "🔋", bin: "peligrosos", reason: "Pilas y baterías → PELIGROSAS → tacho ROJO." },
-  { id: "bidon",      name: "Bidones de combustible",          emoji: "🛢️", bin: "peligrosos", reason: "Bidones de combustible → PELIGROSOS → tacho ROJO." },
-  { id: "quimicos",   name: "Aditivos químicos",               emoji: "🧪", bin: "peligrosos", reason: "Aditivos químicos → PELIGROSOS → tacho ROJO." },
-  // ⚫ NEGRO — No aprovechables
-  { id: "senaliz",    name: "Señalización en mal estado",      emoji: "🚧", bin: "noaprov",    reason: "Señalización deteriorada → no aprovechable → tacho NEGRO." },
-  { id: "botresid",   name: "Botellas con residuos",           emoji: "🍶", bin: "noaprov",    reason: "Botellas contaminadas → no reciclables → tacho NEGRO." },
-  { id: "tecnopor",   name: "Tecnopor",                        emoji: "🧊", bin: "noaprov",    reason: "El tecnopor no es aprovechable → tacho NEGRO." },
-  { id: "eppsdet",    name: "EPPs deteriorados",               emoji: "🥾", bin: "noaprov",    reason: `EPPs deteriorados → tacho NEGRO.\n${MSG_EPP}` },
-  { id: "lentesrot",  name: "Lentes de seguridad rotos",       emoji: "🥽", bin: "noaprov",    reason: `Lentes rotos → tacho NEGRO.\n${MSG_EPP}` },
-  { id: "cascodet",   name: "Casco deteriorado",               emoji: "⛑️", bin: "noaprov",    reason: `Casco deteriorado → tacho NEGRO.\n${MSG_EPP}` },
-  { id: "arnesdet",   name: "Arnés deteriorado",               emoji: "🦺", bin: "noaprov",    reason: `Arnés deteriorado → tacho NEGRO.\n${MSG_EPP}` },
-  // 🟤 MARRÓN — Orgánicos
-  { id: "frutas",     name: "Restos de frutas",                emoji: "🍌", bin: "organicos",  reason: "Restos de frutas → orgánicos → tacho MARRÓN." },
+  { id: "carton",     name: "Cartones",                       emoji: "📦", bin: "papel",      reason: "Los cartones son reciclables → tacho AZUL." },
+  { id: "papel",      name: "Papeles",                        emoji: "📄", bin: "papel",      reason: "Todo papel limpio → tacho AZUL." },
+  { id: "planos",     name: "Impresión de planos",            emoji: "📐", bin: "papel",      reason: "Los planos impresos son papel → tacho AZUL." },
+  { id: "folder",     name: "Folders",                        emoji: "🗂️", bin: "papel",      reason: "Los folders de papel → tacho AZUL." },
+  { id: "clavos",     name: "Clavos",                         emoji: "📌", bin: "metalicos",  reason: "Los clavos son metálicos → tacho AMARILLO." },
+  { id: "fierros",    name: "Retazos de fierros",             emoji: "🔧", bin: "metalicos",  reason: "Los retazos de fierro → tacho AMARILLO." },
+  { id: "pernos",     name: "Pernos",                         emoji: "🔩", bin: "metalicos",  reason: "Los pernos son metálicos → tacho AMARILLO." },
+  { id: "envmetal",   name: "Envases metálicos limpios",      emoji: "🥫", bin: "metalicos",  reason: "Envases metálicos limpios → tacho AMARILLO." },
+  { id: "botgaseosa", name: "Botella de gaseosa limpia",      emoji: "🥤", bin: "plasticos",  reason: "Botellas de plástico limpias → tacho BLANCO." },
+  { id: "botagua",    name: "Botella de agua limpia",         emoji: "💧", bin: "plasticos",  reason: "Botellas de agua limpias → tacho BLANCO." },
+  { id: "vidrio",     name: "Vidrio",                         emoji: "🪟", bin: "vidrios",    reason: "Todo vidrio, limpio o roto → tacho PLOMO." },
+  { id: "guantes",    name: "Guantes con aceite",             emoji: "🧤", bin: "peligrosos", reason: "Guantes con aceite → PELIGROSO → tacho ROJO." },
+  { id: "tyvek",      name: "Tyvek contaminado",              emoji: "🦺", bin: "peligrosos", reason: "Tyvek contaminado → PELIGROSO → tacho ROJO." },
+  { id: "cinta",      name: "Cinta con restos de cemento",    emoji: "🎗️", bin: "peligrosos", reason: "Cinta con cemento → PELIGROSA → tacho ROJO." },
+  { id: "baldepint",  name: "Baldes de pintura",              emoji: "🪣", bin: "peligrosos", reason: "Baldes de pintura → PELIGROSOS → tacho ROJO." },
+  { id: "madera",     name: "Madera con restos de concreto",  emoji: "🪵", bin: "peligrosos", reason: "Madera con concreto → PELIGROSA → tacho ROJO." },
+  { id: "pilas",      name: "Pilas / baterías",               emoji: "🔋", bin: "peligrosos", reason: "Pilas y baterías → PELIGROSAS → tacho ROJO." },
+  { id: "bidon",      name: "Bidones de combustible",         emoji: "🛢️", bin: "peligrosos", reason: "Bidones de combustible → PELIGROSOS → tacho ROJO." },
+  { id: "quimicos",   name: "Aditivos químicos",              emoji: "🧪", bin: "peligrosos", reason: "Aditivos químicos → PELIGROSOS → tacho ROJO." },
+  { id: "senaliz",    name: "Señalización en mal estado",     emoji: "🚧", bin: "noaprov",    reason: "Señalización deteriorada → tacho NEGRO." },
+  { id: "botresid",   name: "Botellas con residuos",          emoji: "🍶", bin: "noaprov",    reason: "Botellas contaminadas → tacho NEGRO." },
+  { id: "tecnopor",   name: "Tecnopor",                       emoji: "🧊", bin: "noaprov",    reason: "El tecnopor → tacho NEGRO." },
+  { id: "eppsdet",    name: "EPPs deteriorados",              emoji: "🥾", bin: "noaprov",    reason: `EPPs deteriorados → tacho NEGRO.\n${MSG_EPP}` },
+  { id: "lentesrot",  name: "Lentes de seguridad rotos",      emoji: "🥽", bin: "noaprov",    reason: `Lentes rotos → tacho NEGRO.\n${MSG_EPP}` },
+  { id: "cascodet",   name: "Casco deteriorado",              emoji: "⛑️", bin: "noaprov",    reason: `Casco deteriorado → tacho NEGRO.\n${MSG_EPP}` },
+  { id: "arnesdet",   name: "Arnés deteriorado",              emoji: "🦺", bin: "noaprov",    reason: `Arnés deteriorado → tacho NEGRO.\n${MSG_EPP}` },
+  { id: "frutas",     name: "Restos de frutas",               emoji: "🍌", bin: "organicos",  reason: "Restos de frutas → orgánicos → tacho MARRÓN." },
 ];
 
 const ROUND_COUNT = 12;
@@ -72,6 +65,68 @@ function fmtDate(iso) {
   return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
+// ── Música Web Audio API ─────────────────────────────────────────
+function useGameMusic() {
+  const ctxRef = useRef(null);
+  const playingRef = useRef(false);
+  const timeoutRef = useRef(null);
+
+  const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
+  const melody = [0,2,4,2,4,5,4,2,0,2,1,0,2,4,7,5,4,2,4,2,0];
+  const bass   = [0,0,4,4,3,3,2,2,0,0,4,4,3,3,2,2];
+
+  function playNote(ctx, master, freq, start, dur, vol, type) {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(vol, start + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, start + dur);
+    osc.connect(g);
+    g.connect(master);
+    osc.start(start);
+    osc.stop(start + dur + 0.05);
+  }
+
+  function start() {
+    if (playingRef.current) return;
+    playingRef.current = true;
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctxRef.current = ctx;
+    const master = ctx.createGain();
+    master.gain.value = 0.15;
+    master.connect(ctx.destination);
+
+    const bpm = 88, beat = 60 / bpm;
+
+    function scheduleLoop(t) {
+      if (!playingRef.current) return;
+      const loopLen = melody.length * beat * 0.5;
+      melody.forEach((n, i) => playNote(ctx, master, notes[n] * 2, t + i * beat * 0.5, beat * 0.45, 0.3, "sine"));
+      bass.forEach((n, i) => playNote(ctx, master, notes[n] * 0.5, t + i * beat, beat * 0.7, 0.2, "triangle"));
+      [0, 2, 4].forEach(n => {
+        playNote(ctx, master, notes[n], t, loopLen * 0.48, 0.07, "sine");
+        playNote(ctx, master, notes[n] * 2, t + loopLen * 0.5, loopLen * 0.48, 0.07, "sine");
+      });
+      const delay = Math.max((loopLen - 0.5) * 1000, 100);
+      timeoutRef.current = setTimeout(() => scheduleLoop(t + loopLen), delay);
+    }
+
+    scheduleLoop(ctx.currentTime + 0.1);
+  }
+
+  function stop() {
+    playingRef.current = false;
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    try { ctxRef.current && ctxRef.current.close(); } catch (e) {}
+    ctxRef.current = null;
+  }
+
+  return { start, stop };
+}
+
+// ── Muñequito ────────────────────────────────────────────────────
 function Mascot({ type = "male", size = 220 }) {
   const src = type === "female" ? "/mascot-female.jpg" : "/mascot-male.jpg";
   return (
@@ -88,6 +143,7 @@ function Mascot({ type = "male", size = 220 }) {
   );
 }
 
+// ── Logo ─────────────────────────────────────────────────────────
 function Logo({ scale = 1 }) {
   return (
     <img src="/logo-cmejia.jpg" alt="CMEJIA S.A.C."
@@ -95,89 +151,8 @@ function Logo({ scale = 1 }) {
   );
 }
 
-// ── Música de fondo con Web Audio API ────────────────────────────
-const useGameMusic = () => {
-  const ctxRef = useRef(null);
-  const nodesRef = useRef([]);
-  const playingRef = useRef(false);
-
-  const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
-  const melody = [0,2,4,2,4,5,4,2,0,2,1,0,2,4,7,5,4,2,4,2,0];
-  const bass   = [0,0,4,4,3,3,2,2,0,0,4,4,3,3,2,2];
-
-  function start() {
-    if (playingRef.current) return;
-    playingRef.current = true;
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    ctxRef.current = ctx;
-    const master = ctx.createGain();
-    master.gain.value = 0.18;
-    master.connect(ctx.destination);
-
-    // reverb simple
-    const reverb = ctx.createConvolver();
-    const len = ctx.sampleRate * 1.5;
-    const buf = ctx.createBuffer(2, len, ctx.sampleRate);
-    for (let c = 0; c < 2; c++) {
-      const d = buf.getChannelData(c);
-      for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/len,2);
-    }
-    reverb.buffer = buf;
-    reverb.connect(master);
-
-    const bpm = 88, beat = 60 / bpm;
-    let t = ctx.currentTime + 0.1;
-
-    function playNote(freq, start, dur, vol = 0.5, type = "sine") {
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc.type = type;
-      osc.frequency.value = freq;
-      g.gain.setValueAtTime(0, start);
-      g.gain.linearRampToValueAtTime(vol, start + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.001, start + dur);
-      osc.connect(g);
-      g.connect(reverb);
-      g.connect(master);
-      osc.start(start);
-      osc.stop(start + dur + 0.05);
-      nodesRef.current.push(osc);
-    }
-
-    function scheduleLoop() {
-      if (!playingRef.current) return;
-      const loopLen = melody.length * beat * 0.5;
-      // melodía
-      melody.forEach((n, i) => {
-        playNote(notes[n] * 2, t + i * beat * 0.5, beat * 0.45, 0.35, "sine");
-      });
-      // bajo
-      bass.forEach((n, i) => {
-        playNote(notes[n] * 0.5, t + i * beat, beat * 0.7, 0.25, "triangle");
-      });
-      // acorde pad
-      [0,2,4].forEach(n => {
-        playNote(notes[n], t, loopLen * 0.48, 0.08, "sine");
-        playNote(notes[n] * 2, t + loopLen * 0.5, loopLen * 0.48, 0.08, "sine");
-      });
-      t += loopLen;
-      nodesRef.current = nodesRef.current.slice(-60);
-      if (playingRef.current) setTimeout(scheduleLoop, (loopLen - 0.3) * 1000);
-    }
-    scheduleLoop();
-  }
-
-  function stop() {
-    playingRef.current = false;
-    nodesRef.current.forEach(n => { try { n.stop(); } catch(e){} });
-    nodesRef.current = [];
-    try { ctxRef.current && ctxRef.current.close(); } catch(e){}
-  }
-
-  return { start, stop };
-};
-
-
+// ── Tacho cilindro ───────────────────────────────────────────────
+function Bin({ bin, onPick, answered, item }) {
   let shadow = "0 4px 10px rgba(0,0,0,0.22)";
   let transform = "none";
   if (answered) {
@@ -200,6 +175,7 @@ const useGameMusic = () => {
   );
 }
 
+// ── Chip ─────────────────────────────────────────────────────────
 function Chip({ bin }) {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 6, borderRadius: 20, padding: "6px 14px", fontWeight: 700, fontSize: 13, background: bin.color, color: bin.text, border: bin.border ? `2px solid ${bin.border}` : "none" }}>
@@ -208,6 +184,7 @@ function Chip({ bin }) {
   );
 }
 
+// ── App ──────────────────────────────────────────────────────────
 export default function App() {
   const [screen, setScreen] = useState("start");
   const [playerName, setPlayerName] = useState("");
@@ -227,17 +204,16 @@ export default function App() {
   const [boardLoading, setBoardLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
-
-  const music = useGameMusic();
   const [musicOn, setMusicOn] = useState(true);
 
-
+  const startRef = useRef(null);
   const tickRef = useRef(null);
   const scoreRef = useRef(0);
   const correctRef = useRef(0);
   const nameRef = useRef("");
   const orderRef = useRef([]);
   const STORE_KEY = "cmejia_ranking_v1";
+  const music = useGameMusic();
 
   function stopTick() { if (tickRef.current) { clearInterval(tickRef.current); tickRef.current = null; } }
   useEffect(() => () => { stopTick(); music.stop(); }, []);
@@ -258,7 +234,7 @@ export default function App() {
     startRef.current = Date.now();
     stopTick();
     tickRef.current = setInterval(() => setElapsed((Date.now() - startRef.current) / 1000), 200);
-    if (musicOn) music.start();
+    if (musicOn) { music.stop(); music.start(); }
     setScreen("play");
   }
 
@@ -304,6 +280,12 @@ export default function App() {
     }
   }
 
+  function toggleMusic() {
+    const next = !musicOn;
+    setMusicOn(next);
+    if (next) music.start(); else music.stop();
+  }
+
   function openRanking() {
     setScreen("ranking"); setConfirmClear(false); setBoardLoading(true);
     try { setBoard(JSON.parse(localStorage.getItem(STORE_KEY) || "[]")); } catch (e) { setBoard([]); }
@@ -338,7 +320,7 @@ export default function App() {
             <Logo scale={1} />
             <span style={{ background: BLUE, color: "#fff", borderRadius: 20, padding: "6px 14px", fontSize: 13, fontWeight: 700 }}>Medio Ambiente</span>
           </div>
-          <div style={{ background: "linear-gradient(135deg,#eaf6fd,#f0f8ff)", padding: "24px 20px 8px", display: "flex", alignItems: "flex-end", gap: 12, flexWrap: "wrap" }}>
+          <div style={{ background: "linear-gradient(135deg,#eaf6fd,#f0f8ff)", padding: "24px 20px 8px", display: "flex", alignItems: "flex-end", gap: 16, flexWrap: "wrap" }}>
             <div style={{ flexShrink: 0 }}>
               <Mascot type="female" size={210} />
             </div>
@@ -369,7 +351,7 @@ export default function App() {
                 {BINS.map((b) => <Chip key={b.id} bin={b} />)}
               </div>
             </div>
-            <button onClick={startGame} style={{ width: "100%", marginTop: 24, padding: "20px", background: BLUE, color: "#fff", border: "none", borderRadius: 16, fontSize: 20, fontWeight: 900, cursor: "pointer", boxShadow: "0 6px 20px rgba(27,157,217,0.4)", letterSpacing: 0.5 }}>
+            <button onClick={startGame} style={{ width: "100%", marginTop: 24, padding: "20px", background: BLUE, color: "#fff", border: "none", borderRadius: 16, fontSize: 20, fontWeight: 900, cursor: "pointer", boxShadow: "0 6px 20px rgba(27,157,217,0.4)" }}>
               ▶ INICIAR JUEGO
             </button>
             <button onClick={openRanking} style={{ width: "100%", marginTop: 12, padding: "16px", background: "#eef2f7", color: NAVY, border: "none", borderRadius: 16, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>
@@ -397,7 +379,7 @@ export default function App() {
               : <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 8 }}>
                   {sortedBoard.map((r, i) => {
                     const acc = Math.round((r.correct / r.total) * 100);
-                    const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i+1}`;
+                    const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i + 1}`;
                     return (
                       <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, background: i < 3 ? "#eaf6fd" : "#f8fafc", borderRadius: 14, padding: "14px 16px" }}>
                         <div style={{ width: 36, textAlign: "center", fontSize: i < 3 ? 26 : 16, fontWeight: 900, color: NAVY }}>{medal}</div>
@@ -451,7 +433,7 @@ export default function App() {
           <div style={{ background: "#fff", borderRadius: 24, boxShadow: "0 8px 32px rgba(0,0,0,0.10)", overflow: "hidden" }}>
             <div style={{ background: NAVY, padding: "14px 20px" }}><Logo /></div>
             <div style={{ padding: "24px 20px" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
                 <Mascot type={acc >= 70 ? "female" : "male"} size={200} />
                 <div style={{ fontSize: 56 }}>{emo}</div>
                 <h2 style={{ color: NAVY, fontSize: 28, fontWeight: 900, textAlign: "center", margin: 0 }}>{rating}</h2>
@@ -494,15 +476,17 @@ export default function App() {
   // ── JUEGO ────────────────────────────────────────────────────────
   const item = order[idx];
   const correctBin = BIN_BY_ID[item.bin];
+  const lines = item.reason.split("\n");
+  const hasEPP = lines.length > 1;
+
   return (
     <div style={wrap}>
       <div style={{ maxWidth: 780, margin: "0 auto", padding: "12px 12px 28px" }}>
         {/* Header */}
         <div style={{ background: "#fff", borderRadius: 18, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
           <Logo scale={0.85} />
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-            <button onClick={() => { setMusicOn(v => { const next=!v; next ? music.start() : music.stop(); return next; })}
-            } style={{ background: musicOn ? "#f0fdf4" : "#f3f4f6", border: `2px solid ${musicOn ? "#16a34a" : "#d1d5db"}`, borderRadius: 12, padding: "8px 12px", fontSize: 20, cursor: "pointer" }}>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <button onClick={toggleMusic} style={{ background: musicOn ? "#f0fdf4" : "#f3f4f6", border: `2px solid ${musicOn ? "#16a34a" : "#d1d5db"}`, borderRadius: 12, padding: "8px 12px", fontSize: 20, cursor: "pointer" }}>
               {musicOn ? "🔊" : "🔇"}
             </button>
             <div style={{ background: NAVY, borderRadius: 12, padding: "8px 14px", textAlign: "center", minWidth: 80 }}>
@@ -534,7 +518,7 @@ export default function App() {
         {/* Tarjeta residuo */}
         <div style={{ background: "#fff", borderRadius: 20, boxShadow: "0 6px 24px rgba(0,0,0,0.09)", padding: "20px 16px", marginTop: 14, display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ flexShrink: 0 }}>
-            <Mascot type="male" size={120} />
+            <Mascot type="male" size={130} />
           </div>
           <div style={{ flex: 1, textAlign: "center" }}>
             <p style={{ fontSize: 16, fontWeight: 700, color: "#666", margin: "0 0 6px" }}>¿A qué tacho va este residuo?</p>
@@ -545,44 +529,36 @@ export default function App() {
 
         {/* Feedback */}
         <div style={{ minHeight: 80, marginTop: 14 }}>
-          {answered && answered.correct && (() => {
-            const lines = item.reason.split("\n");
-            const hasEPP = lines.length > 1;
-            return (
-              <div>
-                <div style={{ background: "#16a34a", borderRadius: 16, padding: "18px 20px", textAlign: "center", color: "#fff", fontSize: 20, fontWeight: 900 }}>
-                  ✅ ¡Correcto! +{lastGain} pts
+          {answered && answered.correct && (
+            <div>
+              <div style={{ background: "#16a34a", borderRadius: 16, padding: "18px 20px", textAlign: "center", color: "#fff", fontSize: 20, fontWeight: 900 }}>
+                ✅ ¡Correcto! +{lastGain} pts
+              </div>
+              {hasEPP && (
+                <div style={{ marginTop: 10, background: "#fffbeb", border: "3px solid #f59e0b", borderRadius: 14, padding: "14px 16px", display: "flex", gap: 12, alignItems: "flex-start" }}>
+                  <span style={{ fontSize: 28, flexShrink: 0 }}>⚠️</span>
+                  <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#92400e", lineHeight: 1.6 }}>{lines[1]}</p>
                 </div>
-                {hasEPP && (
-                  <div style={{ marginTop: 10, background: "#fffbeb", border: "3px solid #f59e0b", borderRadius: 14, padding: "14px 16px", display: "flex", gap: 10, alignItems: "flex-start" }}>
-                    <span style={{ fontSize: 28, flexShrink: 0 }}>⚠️</span>
-                    <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#92400e", lineHeight: 1.6 }}>{lines[1]}</p>
-                  </div>
-                )}
-              </div>
-            );
-          })()}
-          {answered && !answered.correct && (() => {
-            const lines = item.reason.split("\n");
-            const hasEPP = lines.length > 1;
-            return (
-              <div style={{ background: "#fef2f2", border: "2px solid #fca5a5", borderRadius: 16, padding: "16px 20px" }}>
-                <p style={{ color: "#dc2626", fontWeight: 900, fontSize: 18, margin: "0 0 6px" }}>
-                  ❌ Va en el tacho {correctBin.name.toUpperCase()} ({correctBin.short})
-                </p>
-                <p style={{ margin: "0 0 8px", fontSize: 15, fontWeight: 600, color: "#374151", lineHeight: 1.5 }}>{lines[0]}</p>
-                {hasEPP && (
-                  <div style={{ background: "#fffbeb", border: "3px solid #f59e0b", borderRadius: 14, padding: "12px 14px", display: "flex", gap: 10, alignItems: "flex-start" }}>
-                    <span style={{ fontSize: 26, flexShrink: 0 }}>⚠️</span>
-                    <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#92400e", lineHeight: 1.6 }}>{lines[1]}</p>
-                  </div>
-                )}
-                <button onClick={advance} style={{ marginTop: 14, padding: "16px 32px", background: NAVY, color: "#fff", border: "none", borderRadius: 12, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>
-                  Siguiente ▶
-                </button>
-              </div>
-            );
-          })()}
+              )}
+            </div>
+          )}
+          {answered && !answered.correct && (
+            <div style={{ background: "#fef2f2", border: "2px solid #fca5a5", borderRadius: 16, padding: "16px 20px" }}>
+              <p style={{ color: "#dc2626", fontWeight: 900, fontSize: 18, margin: "0 0 6px" }}>
+                ❌ Va en el tacho {correctBin.name.toUpperCase()} ({correctBin.short})
+              </p>
+              <p style={{ margin: "0 0 10px", fontSize: 15, fontWeight: 600, color: "#374151", lineHeight: 1.5 }}>{lines[0]}</p>
+              {hasEPP && (
+                <div style={{ background: "#fffbeb", border: "3px solid #f59e0b", borderRadius: 14, padding: "12px 14px", display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 12 }}>
+                  <span style={{ fontSize: 26, flexShrink: 0 }}>⚠️</span>
+                  <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#92400e", lineHeight: 1.6 }}>{lines[1]}</p>
+                </div>
+              )}
+              <button onClick={advance} style={{ marginTop: 4, padding: "16px 32px", background: NAVY, color: "#fff", border: "none", borderRadius: 12, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>
+                Siguiente ▶
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Tachos */}
