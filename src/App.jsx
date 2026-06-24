@@ -77,8 +77,8 @@ function Mascot({ type = "male", size = 220 }) {
   return (
     <img src={src} alt="Trabajador CMEJIA"
       style={{ height: size, width: "auto", objectFit: "contain", display: "block",
-        filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.15))",
-        mixBlendMode: "multiply",
+        borderRadius: 16,
+        filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.12))",
       }} />
   );
 }
@@ -449,32 +449,44 @@ export default function App() {
 
         {/* Feedback */}
         <div style={{ minHeight: 80, marginTop: 14 }}>
-          {answered && answered.correct && (
-            <div style={{ background: "#16a34a", borderRadius: 16, padding: "18px 20px", textAlign: "center", color: "#fff", fontSize: 20, fontWeight: 900 }}>
-              ✅ ¡Correcto! +{lastGain} pts
-            </div>
-          )}
-          {answered && !answered.correct && (
-            <div style={{ background: "#fef2f2", border: "2px solid #fca5a5", borderRadius: 16, padding: "16px 20px" }}>
-              <p style={{ color: "#dc2626", fontWeight: 900, fontSize: 18, margin: "0 0 8px" }}>
-                ❌ Va en el tacho {correctBin.name.toUpperCase()} ({correctBin.short})
-              </p>
-              {item.reason.split("\n").map((line, i) => (
-                <p key={i} style={{
-                  margin: "6px 0", fontSize: 15, lineHeight: 1.5,
-                  fontWeight: i === 0 ? 600 : 800,
-                  color: i === 0 ? "#374151" : "#92400e",
-                  background: i === 1 ? "#fffbeb" : "transparent",
-                  padding: i === 1 ? "10px 12px" : 0,
-                  borderRadius: i === 1 ? 10 : 0,
-                  border: i === 1 ? "2px solid #fcd34d" : "none",
-                }}>{line}</p>
-              ))}
-              <button onClick={advance} style={{ marginTop: 14, padding: "16px 32px", background: NAVY, color: "#fff", border: "none", borderRadius: 12, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>
-                Siguiente ▶
-              </button>
-            </div>
-          )}
+          {answered && answered.correct && (() => {
+            const lines = item.reason.split("\n");
+            const hasEPP = lines.length > 1;
+            return (
+              <div>
+                <div style={{ background: "#16a34a", borderRadius: 16, padding: "18px 20px", textAlign: "center", color: "#fff", fontSize: 20, fontWeight: 900 }}>
+                  ✅ ¡Correcto! +{lastGain} pts
+                </div>
+                {hasEPP && (
+                  <div style={{ marginTop: 10, background: "#fffbeb", border: "3px solid #f59e0b", borderRadius: 14, padding: "14px 16px", display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 28, flexShrink: 0 }}>⚠️</span>
+                    <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#92400e", lineHeight: 1.6 }}>{lines[1]}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+          {answered && !answered.correct && (() => {
+            const lines = item.reason.split("\n");
+            const hasEPP = lines.length > 1;
+            return (
+              <div style={{ background: "#fef2f2", border: "2px solid #fca5a5", borderRadius: 16, padding: "16px 20px" }}>
+                <p style={{ color: "#dc2626", fontWeight: 900, fontSize: 18, margin: "0 0 6px" }}>
+                  ❌ Va en el tacho {correctBin.name.toUpperCase()} ({correctBin.short})
+                </p>
+                <p style={{ margin: "0 0 8px", fontSize: 15, fontWeight: 600, color: "#374151", lineHeight: 1.5 }}>{lines[0]}</p>
+                {hasEPP && (
+                  <div style={{ background: "#fffbeb", border: "3px solid #f59e0b", borderRadius: 14, padding: "12px 14px", display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 26, flexShrink: 0 }}>⚠️</span>
+                    <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#92400e", lineHeight: 1.6 }}>{lines[1]}</p>
+                  </div>
+                )}
+                <button onClick={advance} style={{ marginTop: 14, padding: "16px 32px", background: NAVY, color: "#fff", border: "none", borderRadius: 12, fontSize: 17, fontWeight: 800, cursor: "pointer" }}>
+                  Siguiente ▶
+                </button>
+              </div>
+            );
+          })()}
         </div>
 
         {/* Tachos */}
