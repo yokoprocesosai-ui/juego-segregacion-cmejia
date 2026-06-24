@@ -65,6 +65,73 @@ function fmtDate(iso) {
   return `${p(d.getDate())}/${p(d.getMonth() + 1)} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
+// ── Efectos de sonido ────────────────────────────────────────────
+function playFX(type) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const master = ctx.createGain();
+    master.connect(ctx.destination);
+
+    if (type === "correct") {
+      // Fanfarria corta: do-mi-sol ascendente
+      [[523.25, 0, 0.12], [659.25, 0.13, 0.12], [783.99, 0.26, 0.22]].forEach(([freq, start, dur]) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        g.gain.setValueAtTime(0, ctx.currentTime + start);
+        g.gain.linearRampToValueAtTime(0.4, ctx.currentTime + start + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+        osc.connect(g); g.connect(master);
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + dur + 0.05);
+      });
+      // Chime brillante encima
+      const osc2 = ctx.createOscillator();
+      const g2 = ctx.createGain();
+      osc2.type = "triangle";
+      osc2.frequency.value = 1046.5;
+      g2.gain.setValueAtTime(0, ctx.currentTime + 0.26);
+      g2.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 0.28);
+      g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+      osc2.connect(g2); g2.connect(master);
+      osc2.start(ctx.currentTime + 0.26);
+      osc2.stop(ctx.currentTime + 0.65);
+
+    } else if (type === "wrong") {
+      // Buzzer descendente
+      [[300, 0, 0.15], [220, 0.16, 0.2]].forEach(([freq, start, dur]) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sawtooth";
+        osc.frequency.value = freq;
+        g.gain.setValueAtTime(0, ctx.currentTime + start);
+        g.gain.linearRampToValueAtTime(0.3, ctx.currentTime + start + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+        osc.connect(g); g.connect(master);
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + dur + 0.05);
+      });
+
+    } else if (type === "epp") {
+      // Alerta: tres pitidos cortos
+      [0, 0.22, 0.44].forEach(start => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "square";
+        osc.frequency.value = 880;
+        g.gain.setValueAtTime(0, ctx.currentTime + start);
+        g.gain.linearRampToValueAtTime(0.2, ctx.currentTime + start + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + 0.15);
+        osc.connect(g); g.connect(master);
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + 0.18);
+      });
+    }
+    setTimeout(() => ctx.close(), 2000);
+  } catch (e) {}
+}
+
 // ── Música Web Audio API ─────────────────────────────────────────
 function useGameMusic() {
   const ctxRef = useRef(null);
@@ -273,8 +340,10 @@ export default function App() {
       correctRef.current += 1; setCorrectCount(correctRef.current);
       setStreak((s) => { const n = s + 1; setBestStreak((b) => Math.max(b, n)); return n; });
       const isEPP = item.reason.includes("almacenero");
+      if (isEPP) playFX("epp"); else playFX("correct");
       setTimeout(() => advance(), isEPP ? 4500 : 1200);
     } else {
+      playFX("wrong");
       setStreak(0);
       setMistakes((m) => [...m, item]);
     }
