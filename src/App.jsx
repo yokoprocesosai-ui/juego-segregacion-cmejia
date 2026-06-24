@@ -75,11 +75,16 @@ function fmtDate(iso) {
 function Mascot({ type = "male", size = 220 }) {
   const src = type === "female" ? "/mascot-female.jpg" : "/mascot-male.jpg";
   return (
-    <img src={src} alt="Trabajador CMEJIA"
-      style={{ height: size, width: "auto", objectFit: "contain", display: "block",
-        borderRadius: 16,
-        filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.12))",
-      }} />
+    <div style={{
+      background: "linear-gradient(160deg,#eaf6fd,#f0f8ff)",
+      borderRadius: 24, padding: "12px 16px 0",
+      boxShadow: "0 4px 16px rgba(27,157,217,0.13)",
+      display: "flex", alignItems: "flex-end", justifyContent: "center",
+      overflow: "hidden",
+    }}>
+      <img src={src} alt="Trabajador CMEJIA"
+        style={{ height: size, width: "auto", objectFit: "contain", display: "block" }} />
+    </div>
   );
 }
 
@@ -90,7 +95,89 @@ function Logo({ scale = 1 }) {
   );
 }
 
-function Bin({ bin, onPick, answered, item }) {
+// ── Música de fondo con Web Audio API ────────────────────────────
+const useGameMusic = () => {
+  const ctxRef = useRef(null);
+  const nodesRef = useRef([]);
+  const playingRef = useRef(false);
+
+  const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
+  const melody = [0,2,4,2,4,5,4,2,0,2,1,0,2,4,7,5,4,2,4,2,0];
+  const bass   = [0,0,4,4,3,3,2,2,0,0,4,4,3,3,2,2];
+
+  function start() {
+    if (playingRef.current) return;
+    playingRef.current = true;
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctxRef.current = ctx;
+    const master = ctx.createGain();
+    master.gain.value = 0.18;
+    master.connect(ctx.destination);
+
+    // reverb simple
+    const reverb = ctx.createConvolver();
+    const len = ctx.sampleRate * 1.5;
+    const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = buf.getChannelData(c);
+      for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/len,2);
+    }
+    reverb.buffer = buf;
+    reverb.connect(master);
+
+    const bpm = 88, beat = 60 / bpm;
+    let t = ctx.currentTime + 0.1;
+
+    function playNote(freq, start, dur, vol = 0.5, type = "sine") {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      g.gain.setValueAtTime(0, start);
+      g.gain.linearRampToValueAtTime(vol, start + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, start + dur);
+      osc.connect(g);
+      g.connect(reverb);
+      g.connect(master);
+      osc.start(start);
+      osc.stop(start + dur + 0.05);
+      nodesRef.current.push(osc);
+    }
+
+    function scheduleLoop() {
+      if (!playingRef.current) return;
+      const loopLen = melody.length * beat * 0.5;
+      // melodía
+      melody.forEach((n, i) => {
+        playNote(notes[n] * 2, t + i * beat * 0.5, beat * 0.45, 0.35, "sine");
+      });
+      // bajo
+      bass.forEach((n, i) => {
+        playNote(notes[n] * 0.5, t + i * beat, beat * 0.7, 0.25, "triangle");
+      });
+      // acorde pad
+      [0,2,4].forEach(n => {
+        playNote(notes[n], t, loopLen * 0.48, 0.08, "sine");
+        playNote(notes[n] * 2, t + loopLen * 0.5, loopLen * 0.48, 0.08, "sine");
+      });
+      t += loopLen;
+      nodesRef.current = nodesRef.current.slice(-60);
+      if (playingRef.current) setTimeout(scheduleLoop, (loopLen - 0.3) * 1000);
+    }
+    scheduleLoop();
+  }
+
+  function stop() {
+    playingRef.current = false;
+    nodesRef.current.forEach(n => { try { n.stop(); } catch(e){} });
+    nodesRef.current = [];
+    try { ctxRef.current && ctxRef.current.close(); } catch(e){}
+  }
+
+  return { start, stop };
+};
+
+
   let shadow = "0 4px 10px rgba(0,0,0,0.22)";
   let transform = "none";
   if (answered) {
@@ -141,7 +228,10 @@ export default function App() {
   const [copied, setCopied] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
 
-  const startRef = useRef(null);
+  const music = useGameMusic();
+  const [musicOn, setMusicOn] = useState(true);
+
+
   const tickRef = useRef(null);
   const scoreRef = useRef(0);
   const correctRef = useRef(0);
@@ -150,7 +240,7 @@ export default function App() {
   const STORE_KEY = "cmejia_ranking_v1";
 
   function stopTick() { if (tickRef.current) { clearInterval(tickRef.current); tickRef.current = null; } }
-  useEffect(() => () => stopTick(), []);
+  useEffect(() => () => { stopTick(); music.stop(); }, []);
 
   function startGame() {
     const nm = playerName.trim();
@@ -168,6 +258,7 @@ export default function App() {
     startRef.current = Date.now();
     stopTick();
     tickRef.current = setInterval(() => setElapsed((Date.now() - startRef.current) / 1000), 200);
+    if (musicOn) music.start();
     setScreen("play");
   }
 
@@ -181,7 +272,7 @@ export default function App() {
   }
 
   function endGame() {
-    stopTick();
+    stopTick(); music.stop();
     const t = (Date.now() - startRef.current) / 1000;
     setFinalTime(t);
     saveResult({ name: nameRef.current, score: scoreRef.current, correct: correctRef.current, total: orderRef.current.length, timeSec: Math.round(t), date: new Date().toISOString() });
@@ -205,7 +296,8 @@ export default function App() {
       scoreRef.current += gain; setScore(scoreRef.current);
       correctRef.current += 1; setCorrectCount(correctRef.current);
       setStreak((s) => { const n = s + 1; setBestStreak((b) => Math.max(b, n)); return n; });
-      setTimeout(() => advance(), 1200);
+      const isEPP = item.reason.includes("almacenero");
+      setTimeout(() => advance(), isEPP ? 4500 : 1200);
     } else {
       setStreak(0);
       setMistakes((m) => [...m, item]);
@@ -408,7 +500,11 @@ export default function App() {
         {/* Header */}
         <div style={{ background: "#fff", borderRadius: 18, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
           <Logo scale={0.85} />
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <button onClick={() => { setMusicOn(v => { const next=!v; next ? music.start() : music.stop(); return next; })}
+            } style={{ background: musicOn ? "#f0fdf4" : "#f3f4f6", border: `2px solid ${musicOn ? "#16a34a" : "#d1d5db"}`, borderRadius: 12, padding: "8px 12px", fontSize: 20, cursor: "pointer" }}>
+              {musicOn ? "🔊" : "🔇"}
+            </button>
             <div style={{ background: NAVY, borderRadius: 12, padding: "8px 14px", textAlign: "center", minWidth: 80 }}>
               <div style={{ color: "#fff", fontWeight: 900, fontSize: 20, lineHeight: 1 }}>⏱️ {formatTime(elapsed)}</div>
               <div style={{ color: "#93c5fd", fontSize: 11, fontWeight: 600 }}>Tiempo</div>
